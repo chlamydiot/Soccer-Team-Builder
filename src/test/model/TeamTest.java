@@ -21,10 +21,26 @@ public class TeamTest {
     }
 
     @Test
+    void testGetName() {
+        assertEquals("Liverpool", testTeam.getName());
+    }
+
+    @Test
+    void testGetFormation() {
+        assertEquals(Formation.FourThreeThree, testTeam.getFormation());
+    }
+
+    @Test
+    void testGetGoaltender() {
+        testTeam.addPlayer433(testGoalie);
+        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+    }
+
+    @Test
     void testConstructor() {
         assertEquals("Liverpool", testTeam.getName());
         assertEquals(Formation.FourThreeThree, testTeam.getFormation());
-        assertEquals(0, testTeam.getMembers().size());
+        assertEquals(0, testTeam.getMemberNames().size());
         assertEquals(null, testTeam.getGoaltender());
         assertEquals(0, testTeam.getDefenders().size());
         assertEquals(0, testTeam.getMidfielders().size());
@@ -70,17 +86,17 @@ public class TeamTest {
         testTeam.addPlayer442(testGoalie);
         assertTrue(testTeam.getGoaltender().equals(testGoalie));
         assertTrue(testTeam.getTeamMembers().contains(testGoalie));
-        assertTrue(testTeam.getMembers().contains("Allison Becker"));
+        assertTrue(testTeam.getMemberNames().contains("Allison Becker"));
 
         testTeam.addPlayer442(testPlayer);
         assertEquals(1, testTeam.getTeamForwards().size());
         assertTrue(testTeam.getTeamMembers().contains(testPlayer));
-        assertTrue(testTeam.getMembers().contains("Darwin Nunez"));
+        assertTrue(testTeam.getMemberNames().contains("Darwin Nunez"));
 
         testTeam.addPlayer442(testPlayer);
         assertEquals(2, testTeam.getTeamForwards().size());
         assertTrue(testTeam.getTeamMembers().contains(testPlayer));
-        assertTrue(testTeam.getMembers().contains("Darwin Nunez"));
+        assertTrue(testTeam.getMemberNames().contains("Darwin Nunez"));
 
         testTeam.addPlayer442(testPlayer);
         assertEquals(2, testTeam.getTeamForwards().size());
@@ -93,17 +109,17 @@ public class TeamTest {
         testTeam.addPlayer352(testGoalie);
         assertTrue(testTeam.getGoaltender().equals(testGoalie));
         assertTrue(testTeam.getTeamMembers().contains(testGoalie));
-        assertTrue(testTeam.getMembers().contains("Allison Becker"));
+        assertTrue(testTeam.getMemberNames().contains("Allison Becker"));
 
         testTeam.addPlayer352(testPlayer);
         assertEquals(1, testTeam.getTeamForwards().size());
         assertTrue(testTeam.getTeamMembers().contains(testPlayer));
-        assertTrue(testTeam.getMembers().contains("Darwin Nunez"));
+        assertTrue(testTeam.getMemberNames().contains("Darwin Nunez"));
 
         testTeam.addPlayer352(testPlayer);
         assertEquals(2, testTeam.getTeamForwards().size());
         assertTrue(testTeam.getTeamMembers().contains(testPlayer));
-        assertTrue(testTeam.getMembers().contains("Darwin Nunez"));
+        assertTrue(testTeam.getMemberNames().contains("Darwin Nunez"));
 
         testTeam.addPlayer352(testPlayer);
         assertEquals(2, testTeam.getTeamForwards().size());
