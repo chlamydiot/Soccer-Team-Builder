@@ -9,7 +9,7 @@ public class Team {
 
     private String teamName;
     private final ArrayList<Player> teamMembers;
-    private final Formation formation;
+    private Formation formation;
     private Player teamGoaltender;
     private final ArrayList<OutfieldPlayer> teamDefenders;
     private final ArrayList<OutfieldPlayer> teamMidfielders;
@@ -31,6 +31,10 @@ public class Team {
         teamName = name;
     }
 
+    public void setFormation(Formation formation) {
+        this.formation = formation;
+    }
+
     public String getName() {
         return teamName;
     }
@@ -41,6 +45,18 @@ public class Team {
 
     public Player getGoaltender() {
         return teamGoaltender;
+    }
+
+    public void setTeamGoaltender(Player player) {
+        this.teamGoaltender = player;
+    }
+
+    public ArrayList getRatings(Team team) {
+        ArrayList ratings = new ArrayList();
+        for (Player player : team.getTeamMembers()) {
+            ratings.add(player.calculateRating());
+        }
+        return ratings;
     }
 
     public ArrayList<OutfieldPlayer> getDefenders() {
