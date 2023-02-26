@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TeamTest {
@@ -23,6 +25,31 @@ public class TeamTest {
     @Test
     void testGetName() {
         assertEquals("Liverpool", testTeam.getName());
+    }
+
+    @Test
+    void testGetRatings() {
+        testTeam.addPlayer433(testGoalie);
+        testTeam.addPlayer433(testPlayer);
+        ArrayList ratings = testTeam.getRatings(testTeam);
+        assertEquals(85, ratings.get(0));
+        assertEquals(78, ratings.get(1));
+    }
+
+    @Test
+    void testSetFormation() {
+        assertTrue(testTeam.getFormation().equals(Formation.FourThreeThree));
+        testTeam.setFormation(Formation.ThreeFiveTwo);
+        assertTrue(testTeam.getFormation().equals(Formation.ThreeFiveTwo));
+    }
+
+    @Test
+    void testSetTeamGoaltender() {
+        testTeam.setTeamGoaltender(testGoalie);
+        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+        testTeam.setTeamGoaltender(testPlayer);
+        assertTrue(testTeam.getGoaltender().equals(testPlayer));
+        assertFalse(testTeam.getGoaltender().equals(testGoalie));
     }
 
     @Test

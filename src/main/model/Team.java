@@ -118,7 +118,6 @@ public class Team {
     //REQUIRES: player must already be part of the team.
     //MODIFIES: this
     //EFFECTS: removes player from the team.
-    //TODO maybe exception for when requires not met
     public void removePlayer(Player player) {
         if (teamMembers.contains(player)) {
             teamMembers.remove(player);
