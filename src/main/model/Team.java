@@ -14,8 +14,6 @@ public class Team {
     private final ArrayList<OutfieldPlayer> teamDefenders;
     private final ArrayList<OutfieldPlayer> teamMidfielders;
     private final ArrayList<OutfieldPlayer> teamForwards;
-    //TODO thinking of making seperate fields for defender, forward, midfielder,
-    //and maybe formation input? then could do if statement for constructor based on the formation selected.
 
     public Team(String name, Formation formation) {
         this.teamName = name;

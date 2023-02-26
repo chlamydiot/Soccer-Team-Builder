@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TeamBuilderApp {
@@ -9,11 +10,30 @@ public class TeamBuilderApp {
     private Team team;
     private Scanner userInput;
     private Goalie gk;
+    private ArrayList<Team> teamsSoFar;
 
     public TeamBuilderApp() {
+        teamsSoFar = new ArrayList<Team>();
         runApp();
     }
 
+    //REQUIRES: teamsSoFar is not empty
+    //MODIFIES: this
+    //EFFECTS: Returns a team previously built for user to view.
+    private Team retrieveTeam(ArrayList<Team> teamsSoFar) {
+        ArrayList listOfNames = new ArrayList();
+        for (Team team : teamsSoFar) {
+            listOfNames.add(team.getName());
+        }
+        System.out.println("These are your teams built so far: " + listOfNames);
+        System.out.println("Please select which team you would like to view. Teams are organized"
+                + "by the same order listed above (1, 2, 3 ...).");
+        int selectedTeamIndex = userInput.nextInt();
+        return teamsSoFar.get(selectedTeamIndex - 1);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: Processes user input.
     private void runApp() {
         Boolean keepRunning = true;
         String command = null;
@@ -32,6 +52,8 @@ public class TeamBuilderApp {
         System.out.println("Bye!");
     }
 
+    //MODIFIES: this
+    //EFFECTS: Allows user to set team name
     private void createTeamName() {
         System.out.println("\nWelcome to Team Builder! Please input your team name:");
         String teamName = userInput.next();
@@ -45,6 +67,8 @@ public class TeamBuilderApp {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: Allows user to set formation for their team
     @SuppressWarnings("methodlength")
     private void createTeam(String teamName) {
         team = new Team(teamName, Formation.FourThreeThree);
@@ -71,17 +95,35 @@ public class TeamBuilderApp {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: Allows user to add a player to myTeam or edit a player currently in myTeam.
+    //if the team is full, allows the user to edit a player or end the program.
     private void buildTeam(Team myTeam) {
-        System.out.println("Input ap to add a player, or ep to edit a player");
-        String cmd = userInput.next();
+        while (myTeam.getTeamMembers().size() < 11) {
+            System.out.println("Input ap to add a player, or ep to edit a player");
+            String cmd = userInput.next();
 
-        if (cmd.equals("ap")) {
-            addPlayer(myTeam);
-        } else if (cmd.equals("ep")) {
+            if (cmd.equals("ap")) {
+                addPlayer(myTeam);
+            } else if (cmd.equals("ep")) {
+                editPlayer(myTeam);
+            }
+        }
+
+        printTeamDetails(myTeam);
+        System.out.println("Input ep to edit a player on your team, or f to finish");
+        String editOrFinish = userInput.next();
+        if (editOrFinish.equals("ep")) {
             editPlayer(myTeam);
+        } else if (editOrFinish.equals(editOrFinish)) {
+            teamsSoFar.add(myTeam);
+            runApp();
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: Adds a player to myTeam.
+    @SuppressWarnings("methodlength")
     private void addPlayer(Team myTeam) {
         String position;
         Position pos;
@@ -89,28 +131,38 @@ public class TeamBuilderApp {
         System.out.println("Enter your player's position: GK, DEF, MID, FWD");
         position = userInput.next().toLowerCase();
 
-        while (myTeam.getTeamMembers().size() < 11) {
-            if (myTeam.getFormation().equals(Formation.FourThreeThree)) {
-                pos = processPosition(position);
-                Player player = createPlayer(myTeam, pos);
-                myTeam.addPlayer433(player);
-            } else if (myTeam.getFormation().equals(Formation.FourFourTwo)) {
-                pos = processPosition(position);
-                Player player = createPlayer(myTeam, pos);
-                myTeam.addPlayer442(player);
-            } else if (myTeam.getFormation().equals(Formation.ThreeFiveTwo)) {
-                pos = processPosition(position);
-                Player player = createPlayer(myTeam, pos);
-                myTeam.addPlayer352(player);
-            }
-            System.out.println("You've currently added " + myTeam.getTeamMembers().size() + " "
-                    + "out of 11 players to your team!");
-            buildTeam(myTeam);
+        if (myTeam.getFormation().equals(Formation.FourThreeThree)) {
+            pos = processPosition(position);
+            Player player = createPlayer(pos);
+            myTeam.addPlayer433(player);
+            System.out.println("You've added " + myTeam.getDefenders().size()
+                    + " defenders, " + myTeam.getMidfielders().size()
+                    + " midfielders, and " + myTeam.getTeamForwards().size()
+                    + " forwards to your team.");
+        } else if (myTeam.getFormation().equals(Formation.FourFourTwo)) {
+            pos = processPosition(position);
+            Player player = createPlayer(pos);
+            myTeam.addPlayer442(player);
+            System.out.println("You've added" + myTeam.getDefenders().size()
+                    + "defenders," + myTeam.getMidfielders().size()
+                    + "midfielders, and " + myTeam.getTeamForwards().size()
+                    + "forwards to your team.");
+        } else if (myTeam.getFormation().equals(Formation.ThreeFiveTwo)) {
+            pos = processPosition(position);
+            Player player = createPlayer(pos);
+            myTeam.addPlayer352(player);
+            System.out.println("You've added" + myTeam.getDefenders().size()
+                    + "defenders," + myTeam.getMidfielders().size()
+                    + "midfielders, and " + myTeam.getTeamForwards().size()
+                    + "forwards to your team.");
         }
-        printTeamDetails(myTeam);
-        //TODO add option to either edit, or end.
+        System.out.println("You've currently added " + myTeam.getTeamMembers().size() + " "
+                + "out of 11 players to your team!");
+        buildTeam(myTeam);
     }
 
+    //MODIFIES: this
+    //EFFECTS: Allows user to edit a player in myTeam.
     private void editPlayer(Team myTeam) {
         System.out.println("These are your team members currently: " + myTeam.getMemberNames());
         System.out.println("These are their ratings: " + myTeam.getRatings(myTeam));
@@ -119,7 +171,7 @@ public class TeamBuilderApp {
 
         Player playerToEdit = myTeam.getTeamMembers().get(indexToEdit);
         myTeam.removePlayer(playerToEdit);
-        playerToEdit = createPlayer(myTeam, playerToEdit.getPosition());
+        playerToEdit = createPlayer(playerToEdit.getPosition());
         myTeam.getTeamMembers().add(indexToEdit, playerToEdit);
 
         if (playerToEdit.getPosition().equals(Position.GOALTENDER)) {
@@ -136,8 +188,11 @@ public class TeamBuilderApp {
         buildTeam(myTeam);
     }
 
+    //REQUIRES: pos is one of: GOALTENDER, DEFENDER, MIDFIELDER, FORWARD
+    //MODIFIES: this
+    //EFFECTS: Creates a player and sets their attributes based on user input.
     @SuppressWarnings("methodlength")
-    private Player createPlayer(Team myTeam, Position pos) {
+    private Player createPlayer(Position pos) {
         Player player;
         if (pos.equals(Position.GOALTENDER)) {
             System.out.println("Enter Goalkeeper name:");
@@ -184,6 +239,8 @@ public class TeamBuilderApp {
         return player;
     }
 
+
+    //EFFECTS: Sets player position based on user input.
     private Position processPosition(String input) {
         Position pos = null;
         if (input.equals("gk")) {
@@ -198,18 +255,25 @@ public class TeamBuilderApp {
         return pos;
     }
 
+    //MODIFIES: this
+    //EFFECTS: processes user command
     private void process(String command) {
         if (command.equals("bt")) {
             createTeamName();
+        } else if (command.equals("v")) {
+            retrieveTeam(teamsSoFar);
         }
     }
 
+    //EFFECTS: Displays main menu options to user.
     private void menu() {
         System.out.println("\nPlease select one of the following:");
         System.out.println("\tbt --> Build Team");
+        System.out.println("\tv --> View Teams Previously Built");
         System.out.println("\tq  --> Quit");
     }
 
+    //EFFECTS: Displays team information to user, including team name, formation, members and rating.
     private void printTeamDetails(Team myTeam) {
         System.out.println("Your team name is" + myTeam.getName());
         System.out.println("Your formation is: " + myTeam.getFormation());
