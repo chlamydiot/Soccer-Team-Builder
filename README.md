@@ -25,9 +25,14 @@ to recreate some of my favourite professional teams.
 
 ## User stories:
 - As a user, I want to be able to add players to my team
+- As a user, I want to be able to edit players already in my team
 - As a user, I want to be able to remove players from my team
 - As a user, I want to be able to save and load previous team's that I've built
 - As a user, I want to be able to use a few of the most popular team formations when forming my team.
 - As a user, I want to be able to input player statistics/ratings when forming my team
-- As a user, I want to be able to see my team's overall rating based on player ratings and chemistry
+- As a user, I want to be able to see my team's overall rating based on player ratings
 - As a user, I want to be able to give my team a name
+
+- As a user, I want to have the option to save my team to file
+- As a user, I want to have the option to load previous teams from file, or pick up where I left off if the team
+was uncompleted.
