@@ -87,7 +87,6 @@ public class TeamBuilderApp {
 
     //MODIFIES: this
     //EFFECTS: Allows user to set formation for their team
-    @SuppressWarnings("methodlength")
     private void createTeam(String teamName) {
         team = new Team(teamName, Formation.FourThreeThree);
         Formation form;

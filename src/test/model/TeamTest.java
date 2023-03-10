@@ -38,18 +38,18 @@ public class TeamTest {
 
     @Test
     void testSetFormation() {
-        assertTrue(testTeam.getFormation().equals(Formation.FourThreeThree));
+        assertEquals(testTeam.getFormation(), Formation.FourThreeThree);
         testTeam.setFormation(Formation.ThreeFiveTwo);
-        assertTrue(testTeam.getFormation().equals(Formation.ThreeFiveTwo));
+        assertEquals(testTeam.getFormation(), Formation.ThreeFiveTwo);
     }
 
     @Test
     void testSetTeamGoaltender() {
         testTeam.setTeamGoaltender(testGoalie);
-        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+        assertEquals(testTeam.getGoaltender(), testGoalie);
         testTeam.setTeamGoaltender(testPlayer);
-        assertTrue(testTeam.getGoaltender().equals(testPlayer));
-        assertFalse(testTeam.getGoaltender().equals(testGoalie));
+        assertEquals(testTeam.getGoaltender(), testPlayer);
+        assertNotEquals(testTeam.getGoaltender(), testGoalie);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class TeamTest {
     @Test
     void testGetGoaltender() {
         testTeam.addPlayer433(testGoalie);
-        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+        assertEquals(testTeam.getGoaltender(), testGoalie);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class TeamTest {
         assertEquals("Liverpool", testTeam.getName());
         assertEquals(Formation.FourThreeThree, testTeam.getFormation());
         assertEquals(0, testTeam.getMemberNames().size());
-        assertEquals(null, testTeam.getGoaltender());
+        assertNull(testTeam.getGoaltender());
         assertEquals(0, testTeam.getDefenders().size());
         assertEquals(0, testTeam.getMidfielders().size());
         assertEquals(0, testTeam.getTeamForwards().size());
@@ -111,7 +111,7 @@ public class TeamTest {
     void testAddPlayer433() {
         assertEquals(0, testTeam.getTeamMembers().size());
         testTeam.addPlayer433(testGoalie);
-        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+        assertEquals(testTeam.getGoaltender(), testGoalie);
         testTeam.addPlayer433(testPlayer);
         assertTrue(testTeam.getTeamForwards().contains(testPlayer));
         testTeam.addPlayer433(testPlayer);
@@ -137,6 +137,13 @@ public class TeamTest {
         testTeam.addPlayer433(testPlayer);
         assertEquals(9, testTeam.getTeamMembers().size());
         assertEquals(1, testTeam.getMidfielders().size());
+        testTeam.addPlayer433(testPlayer);
+        testTeam.addPlayer433(testPlayer);
+        assertEquals(11, testTeam.getTeamMembers().size());
+        assertEquals(3, testTeam.getMidfielders().size());
+        testTeam.addPlayer433(testPlayer);
+        assertEquals(11, testTeam.getTeamMembers().size());
+        assertEquals(3, testTeam.getMidfielders().size());
     }
 
     @Test
@@ -144,7 +151,7 @@ public class TeamTest {
         assertEquals(0, testTeam.getTeamMembers().size());
 
         testTeam.addPlayer442(testGoalie);
-        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+        assertEquals(testTeam.getGoaltender(), testGoalie);
         assertTrue(testTeam.getTeamMembers().contains(testGoalie));
         assertTrue(testTeam.getMemberNames().contains("Allison Becker"));
 
@@ -167,7 +174,7 @@ public class TeamTest {
         assertEquals(0, testTeam.getTeamMembers().size());
 
         testTeam.addPlayer352(testGoalie);
-        assertTrue(testTeam.getGoaltender().equals(testGoalie));
+        assertEquals(testTeam.getGoaltender(), testGoalie);
         assertTrue(testTeam.getTeamMembers().contains(testGoalie));
         assertTrue(testTeam.getMemberNames().contains("Allison Becker"));
 
@@ -187,6 +194,9 @@ public class TeamTest {
 
     @Test
     void testRemovePlayer() {
+        OutfieldPlayer newPlayer = new OutfieldPlayer("Bob", 33, 22, Position.MIDFIELDER,
+                44, 55,44, 22, 11,44);
+
         testTeam.addPlayer(testGoalie, 4, 3, 3);
         assertEquals(1, testTeam.getTeamMembers().size());
         testTeam.addPlayer(testPlayer, 4, 3, 3);
@@ -196,6 +206,11 @@ public class TeamTest {
         assertEquals(1, testTeam.getTeamMembers().size());
         testTeam.removePlayer(testPlayer);
         assertEquals(0, testTeam.getTeamMembers().size());
+
+        testTeam.addPlayer(testGoalie, 4, 3, 3);
+        testTeam.addPlayer(testPlayer, 4, 3, 3);
+        testTeam.removePlayer(newPlayer);
+        assertEquals(2, testTeam.getTeamMembers().size());
     }
 
     @Test
