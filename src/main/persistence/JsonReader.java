@@ -39,7 +39,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses listOfTeams from JSON object and returns it
     private ListOfTeams parseTeam(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         ListOfTeams listOfTeams = new ListOfTeams();
@@ -47,8 +47,8 @@ public class JsonReader {
         return listOfTeams;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: listOfTeams
+    // EFFECTS: parses teams from JSON object and adds them to listOfTeams
     private void addTeams(ListOfTeams listOfTeams, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("teams");
         for (Object json : jsonArray) {
@@ -86,7 +86,8 @@ public class JsonReader {
 
         for (Object player : teamMembers) {
             JSONObject p = (JSONObject) player;
-            players.add(generatePlayer(p));
+            Player teamMember = generatePlayer(p);
+            players.add(teamMember);
         }
         return players;
     }
@@ -103,29 +104,29 @@ public class JsonReader {
 
     private Player getGoalieFromSave(JSONObject player) {
         String name = player.getString("name");
-        int jerseyNum = player.getInt("jersey number");
+        int jerseyNum = player.getInt("jerseyNumber");
         int age = player.getInt("age");
-        int dr = player.getInt("diving");
-        int hr = player.getInt("handling");
-        int kr = player.getInt("kicking");
-        int rr = player.getInt("reflexes");
-        int sr = player.getInt("speed");
-        int pr = player.getInt("positioning");
+        int dr = player.getInt("diveRating");
+        int hr = player.getInt("handlingRating");
+        int kr = player.getInt("kickRating");
+        int rr = player.getInt("reflexRating");
+        int sr = player.getInt("speedRating");
+        int pr = player.getInt("positioningRating");
         Player p = new Goalie(name, jerseyNum, age, dr, hr, kr, rr, sr, pr);
 
         return p;
     }
 
     private Player getOutfieldPlayerFromSave(Position pos, JSONObject player) {
-        String name = player.getString("player name");
-        int jerseyNum = player.getInt("jersey number");
+        String name = player.getString("name");
+        int jerseyNum = player.getInt("jerseyNumber");
         int age = player.getInt("age");
-        int pr = player.getInt("pace");
-        int sr = player.getInt("shot");
-        int passr = player.getInt("passing");
-        int dr = player.getInt("dribbling");
-        int physr = player.getInt("physicality");
-        int defr = player.getInt("defending");
+        int pr = player.getInt("paceRating");
+        int sr = player.getInt("shotRating");
+        int passr = player.getInt("passingRating");
+        int dr = player.getInt("dribblingRating");
+        int physr = player.getInt("physicalityRating");
+        int defr = player.getInt("defendingRating");
         Player p = new OutfieldPlayer(name, jerseyNum, age, pos, pr, sr, passr, dr, physr, defr);
 
         return p;
