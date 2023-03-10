@@ -1,19 +1,23 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 import static java.lang.Math.round;
 
 //A soccer/football team with name and team members
-public class Team {
+public class Team implements Writable {
 
     private String teamName;
-    private final ArrayList<Player> teamMembers;
+    private ArrayList<Player> teamMembers;
     private Formation formation;
     private Player teamGoaltender;
-    private final ArrayList<OutfieldPlayer> teamDefenders;
-    private final ArrayList<OutfieldPlayer> teamMidfielders;
-    private final ArrayList<OutfieldPlayer> teamForwards;
+    private ArrayList<OutfieldPlayer> teamDefenders;
+    private ArrayList<OutfieldPlayer> teamMidfielders;
+    private  ArrayList<OutfieldPlayer> teamForwards;
 
     public Team(String name, Formation formation) {
         this.teamName = name;
@@ -47,6 +51,22 @@ public class Team {
 
     public void setTeamGoaltender(Player player) {
         this.teamGoaltender = player;
+    }
+
+    public void setTeamDefenders(ArrayList defenders) {
+        this.teamDefenders = defenders;
+    }
+
+    public void setTeamMidfielders(ArrayList midfielders) {
+        this.teamMidfielders = midfielders;
+    }
+
+    public void setTeamForwards(ArrayList forwards) {
+        this.teamForwards = forwards;
+    }
+
+    public void setTeamMembers(ArrayList members) {
+        this.teamMembers = members;
     }
 
     public ArrayList getRatings(Team team) {
@@ -133,5 +153,29 @@ public class Team {
             ratings += player.calculateRating();
         }
         return round(ratings / list.size());
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("team name", teamName);
+        json.put("team members", teamMembers);
+        json.put("formation", formation);
+        json.put("team goalie", teamGoaltender);
+        json.put("team defenders", playersToJson(teamDefenders));
+        json.put("team midfielders", playersToJson(teamMidfielders));
+        json.put("team forwards", playersToJson(teamForwards));
+        return json;
+    }
+
+    // EFFECTS: returns players in this team as a JSON array
+    private JSONArray playersToJson(ArrayList<OutfieldPlayer> players) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (OutfieldPlayer player : players) {
+            jsonArray.put(player.toJson());
+        }
+
+        return jsonArray;
     }
 }

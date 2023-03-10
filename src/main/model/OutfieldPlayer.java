@@ -1,11 +1,14 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import static java.lang.Math.round;
 
 // represents a outfield player (IE. non-goalie player) having a name, jersey number, age, position
 // and ratings for the following metrics; pace, shot, passing, dribbling, physicality
 // and defending.
-public class OutfieldPlayer implements Player {
+public class OutfieldPlayer implements Writable, Player {
 
     private String name;
     private int jerseyNumber;
@@ -155,6 +158,22 @@ public class OutfieldPlayer implements Player {
             return round(result);
         }
         return 0;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("jersey number", jerseyNumber);
+        json.put("age", age);
+        json.put("position", position);
+        json.put("pace", paceRating);
+        json.put("shot", shotRating);
+        json.put("passing", passingRating);
+        json.put("dribbling", dribblingRating);
+        json.put("physicality", physicalityRating);
+        json.put("defending", defendingRating);
+        return json;
     }
 }
 

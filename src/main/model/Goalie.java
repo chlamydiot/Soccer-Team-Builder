@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import static java.lang.Math.round;
 
 //Represents a Goaltender having a name, age, jersey number, and dive, handling, kicking, reflex, speed and positioning
 //ratings.
-public class Goalie implements Player {
+public class Goalie implements Player, Writable {
 
     private static final Position pos = Position.GOALTENDER;
 
@@ -20,7 +23,9 @@ public class Goalie implements Player {
     private int positioningRating;
 
 
-    //TODO specifications
+    //REQUIRES: age, jerseyNumber, diving, handling, kicking, reflexes, speed, positioning >= 0.
+    //EFFECTS: Constructs Goalie with name, age, jerseyNumber, diving rating, handling rating, kicking rating,
+    // reflexes rating, speed rating, and positioning rating.
     public Goalie(String name, int age, int jerseyNumber, int diving, int handling,
                   int kicking, int reflexes, int speed, int positioning) {
         this.name = name;
@@ -129,5 +134,20 @@ public class Goalie implements Player {
         double ratingForSpeed = speedRating * coefficientTwo;
 
         return (int) round(ratingFromFive + ratingForSpeed);
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("jersey number", jerseyNumber);
+        json.put("age", age);
+        json.put("position", position);
+        json.put("diving", diveRating);
+        json.put("handling", handlingRating);
+        json.put("kicking", kickRating);
+        json.put("reflexes", reflexRating);
+        json.put("speed", speedRating);
+        json.put("positioning", positioningRating);
+        return json;
     }
 }
