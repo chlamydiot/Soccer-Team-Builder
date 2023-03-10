@@ -31,7 +31,7 @@ public class TeamBuilderApp {
     //REQUIRES: teamsSoFar is not empty
     //MODIFIES: this
     //EFFECTS: Returns a team previously built for user to view.
-    private Team retrieveTeam(ListOfTeams teamsSoFar) {
+    private void retrieveTeam(ListOfTeams teamsSoFar) {
         ArrayList listOfNames = new ArrayList();
         ArrayList<Team> teams = teamsSoFar.getTeams();
         for (Team team : teams) {
@@ -41,14 +41,20 @@ public class TeamBuilderApp {
         System.out.println("Please select which team you would like to view. Teams are organized"
                 + "by the same order listed above (1, 2, 3 ...).");
         int selectedTeamIndex = userInput.nextInt();
-        return teams.get(selectedTeamIndex - 1);
+
+        if (selectedTeamIndex > listOfNames.size()) {
+            System.out.println("Invalid selection!");
+            runApp();
+        } else {
+            buildTeam(teams.get(selectedTeamIndex - 1));
+        }
     }
 
     //MODIFIES: this
     //EFFECTS: Processes user input.
     private void runApp() {
         Boolean keepRunning = true;
-        String command = null;
+        String command;
         userInput = new Scanner(System.in);
         userInput.useDelimiter("\n");
         while (keepRunning) {
@@ -142,22 +148,17 @@ public class TeamBuilderApp {
         System.out.println("Enter your player's position: GK, DEF, MID, FWD");
         position = userInput.next().toLowerCase();
 
+        pos = processPosition(position);
+        Player player = createPlayer(pos);
+
         if (myTeam.getFormation().equals(Formation.FourThreeThree)) {
-            pos = processPosition(position);
-            Player player = createPlayer(pos);
             myTeam.addPlayer433(player);
-            printTeamInfo(myTeam);
         } else if (myTeam.getFormation().equals(Formation.FourFourTwo)) {
-            pos = processPosition(position);
-            Player player = createPlayer(pos);
             myTeam.addPlayer442(player);
-            printTeamInfo(myTeam);
         } else if (myTeam.getFormation().equals(Formation.ThreeFiveTwo)) {
-            pos = processPosition(position);
-            Player player = createPlayer(pos);
             myTeam.addPlayer352(player);
-            printTeamInfo(myTeam);
         }
+        printTeamInfo(myTeam);
         System.out.println("You've currently added " + myTeam.getTeamMembers().size() + " "
                 + "out of 11 players to your team!");
         buildTeam(myTeam);

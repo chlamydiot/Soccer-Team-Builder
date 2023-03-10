@@ -81,6 +81,7 @@ public class JsonReader {
         listOfTeams.addTeamToList(team);
     }
 
+    //EFFECTS: parses players from JSONArray, instantiates them, and adds them to a list of team players.
     private ArrayList getTeamMembers(JSONArray teamMembers) {
         ArrayList players = new ArrayList<>();
 
@@ -92,6 +93,8 @@ public class JsonReader {
         return players;
     }
 
+    //EFFECTS: Generates player position, and instantiates players based on whether player
+    // is an outfield player or goaltender.
     private Player generatePlayer(JSONObject player) {
         Position pos = Position.valueOf(player.getString("position"));
 
@@ -102,6 +105,7 @@ public class JsonReader {
         }
     }
 
+    //EFFECTS: instantiates goalie player
     private Player getGoalieFromSave(JSONObject player) {
         String name = player.getString("name");
         int jerseyNum = player.getInt("jerseyNumber");
@@ -117,6 +121,7 @@ public class JsonReader {
         return p;
     }
 
+    //EFFECTS: instantiates outfield player based on position.
     private Player getOutfieldPlayerFromSave(Position pos, JSONObject player) {
         String name = player.getString("name");
         int jerseyNum = player.getInt("jerseyNumber");
@@ -132,6 +137,7 @@ public class JsonReader {
         return p;
     }
 
+    //EFFECTS: returns team goaltender.
     private Player getGoalie(ArrayList<Player> players) {
         Player g = null;
         for (Player p : players) {
@@ -154,6 +160,7 @@ public class JsonReader {
         return getPlayersOfPosition(players, Position.FORWARD);
     }
 
+    //EFFECTS: returns a list of all outfield players with given position in players.
     private ArrayList<OutfieldPlayer> getPlayersOfPosition(ArrayList<Player> players, Position position) {
         ArrayList playersOfPosition = new ArrayList();
         for (Player p : players) {
@@ -164,3 +171,5 @@ public class JsonReader {
         return playersOfPosition;
     }
 }
+
+//TODO JSON tests.
