@@ -53,6 +53,39 @@ public class TeamTest {
     }
 
     @Test
+    void testSetTeamDefenders() {
+        assertEquals(0, testTeam.getDefenders().size());
+        testPlayer.setPosition(Position.DEFENDER);
+        ArrayList defList = new ArrayList();
+        defList.add(testPlayer);
+        testTeam.setTeamDefenders(defList);
+        assertEquals(1, testTeam.getDefenders().size());
+        assertEquals(testPlayer, testTeam.getDefenders().get(0));
+    }
+
+    @Test
+    void testSetTeamMidfielders() {
+        assertEquals(0, testTeam.getMidfielders().size());
+        testPlayer.setPosition(Position.MIDFIELDER);
+        ArrayList midList = new ArrayList();
+        midList.add(testPlayer);
+        testTeam.setTeamMidfielders(midList);
+        assertEquals(1, testTeam.getMidfielders().size());
+        assertEquals(testPlayer, testTeam.getMidfielders().get(0));
+    }
+
+    @Test
+    void testSetTeamForwards() {
+        assertEquals(0, testTeam.getTeamForwards().size());
+        testPlayer.setPosition(Position.FORWARD);
+        ArrayList fwdList = new ArrayList();
+        fwdList.add(testPlayer);
+        testTeam.setTeamForwards(fwdList);
+        assertEquals(1, testTeam.getTeamForwards().size());
+        assertEquals(testPlayer, testTeam.getTeamForwards().get(0));
+    }
+
+    @Test
     void testGetFormation() {
         assertEquals(Formation.FourThreeThree, testTeam.getFormation());
     }

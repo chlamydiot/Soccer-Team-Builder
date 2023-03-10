@@ -1,0 +1,263 @@
+"team name": "live",
+"team members": [
+{
+"handlingRating": 55,
+"name": "dan",
+"jerseyNumber": 33,
+"speedRating": 88,
+"position": "GOALTENDER",
+"reflexRating": 77,
+"positioningRating": 66,
+"diveRating": 44,
+"age": 22,
+"kickRating": 66
+},
+{
+"physicalityRating": 66,
+"dribblingRating": 77,
+"paceRating": 66,
+"passingRating": 44,
+"name": "john",
+"jerseyNumber": 33,
+"position": "DEFENDER",
+"defendingRating": 55,
+"shotRating": 55,
+"age": 55
+},
+{
+"physicalityRating": 33,
+"dribblingRating": 22,
+"paceRating": 44,
+"passingRating": 99,
+"name": "ian",
+"jerseyNumber": 99,
+"position": "DEFENDER",
+"defendingRating": 55,
+"shotRating": 55,
+"age": 33
+},
+{
+"physicalityRating": 44,
+"dribblingRating": 55,
+"paceRating": 55,
+"passingRating": 33,
+"name": "stuart",
+"jerseyNumber": 43,
+"position": "DEFENDER",
+"defendingRating": 33,
+"shotRating": 22,
+"age": 44
+},
+{
+"physicalityRating": 33,
+"dribblingRating": 22,
+"paceRating": 44,
+"passingRating": 44,
+"name": "yut",
+"jerseyNumber": 55,
+"position": "DEFENDER",
+"defendingRating": 44,
+"shotRating": 55,
+"age": 33
+},
+{
+"physicalityRating": 55,
+"dribblingRating": 44,
+"paceRating": 55,
+"passingRating": 0,
+"name": "wart",
+"jerseyNumber": 60,
+"position": "MIDFIELDER",
+"defendingRating": 66,
+"shotRating": 33,
+"age": 44
+},
+{
+"physicalityRating": 44,
+"dribblingRating": 66,
+"paceRating": 66,
+"passingRating": 55,
+"name": "bar",
+"jerseyNumber": 55,
+"position": "MIDFIELDER",
+"defendingRating": 55,
+"shotRating": 77,
+"age": 44
+},
+{
+"physicalityRating": 44,
+"dribblingRating": 55,
+"paceRating": 33,
+"passingRating": 44,
+"name": "tr",
+"jerseyNumber": 44,
+"position": "MIDFIELDER",
+"defendingRating": 33,
+"shotRating": 66,
+"age": 55
+},
+{
+"physicalityRating": 70,
+"dribblingRating": 60,
+"paceRating": 60,
+"passingRating": 50,
+"name": "bb",
+"jerseyNumber": 40,
+"position": "MIDFIELDER",
+"defendingRating": 60,
+"shotRating": 70,
+"age": 70
+},
+{
+"physicalityRating": 64,
+"dribblingRating": 55,
+"paceRating": 42,
+"passingRating": 3,
+"name": "bring",
+"jerseyNumber": 55,
+"position": "FORWARD",
+"defendingRating": 46,
+"shotRating": 43,
+"age": 13
+},
+{
+"physicalityRating": 44,
+"dribblingRating": 66,
+"paceRating": 33,
+"passingRating": 55,
+"name": "irn",
+"jerseyNumber": 55,
+"position": "FORWARD",
+"defendingRating": 55,
+"shotRating": 44,
+"age": 66
+}
+],
+"formation": "FourFourTwo",
+"team midfielders": [
+{
+"jersey number": 60,
+"dribbling": 44,
+"pace": 55,
+"name": "wart",
+"defending": 66,
+"position": "MIDFIELDER",
+"passing": 0,
+"physicality": 55,
+"age": 44,
+"shot": 33
+},
+{
+"jersey number": 55,
+"dribbling": 66,
+"pace": 66,
+"name": "bar",
+"defending": 55,
+"position": "MIDFIELDER",
+"passing": 55,
+"physicality": 44,
+"age": 44,
+"shot": 77
+},
+{
+"jersey number": 44,
+"dribbling": 55,
+"pace": 33,
+"name": "tr",
+"defending": 33,
+"position": "MIDFIELDER",
+"passing": 44,
+"physicality": 44,
+"age": 55,
+"shot": 66
+},
+{
+"jersey number": 40,
+"dribbling": 60,
+"pace": 60,
+"name": "bb",
+"defending": 60,
+"position": "MIDFIELDER",
+"passing": 50,
+"physicality": 70,
+"age": 70,
+"shot": 70
+}
+],
+"team defenders": [
+{
+"jersey number": 33,
+"dribbling": 77,
+"pace": 66,
+"name": "john",
+"defending": 55,
+"position": "DEFENDER",
+"passing": 44,
+"physicality": 66,
+"age": 55,
+"shot": 55
+},
+{
+"jersey number": 99,
+"dribbling": 22,
+"pace": 44,
+"name": "ian",
+"defending": 55,
+"position": "DEFENDER",
+"passing": 99,
+"physicality": 33,
+"age": 33,
+"shot": 55
+},
+{
+"jersey number": 43,
+"dribbling": 55,
+"pace": 55,
+"name": "stuart",
+"defending": 33,
+"position": "DEFENDER",
+"passing": 33,
+"physicality": 44,
+"age": 44,
+"shot": 22
+},
+{
+"jersey number": 55,
+"dribbling": 22,
+"pace": 44,
+"name": "yut",
+"defending": 44,
+"position": "DEFENDER",
+"passing": 44,
+"physicality": 33,
+"age": 33,
+"shot": 55
+}
+],
+"team goalie": "model.Goalie@3b0143d3",
+"team forwards": [
+{
+"jersey number": 55,
+"dribbling": 55,
+"pace": 42,
+"name": "bring",
+"defending": 46,
+"position": "FORWARD",
+"passing": 3,
+"physicality": 64,
+"age": 13,
+"shot": 43
+},
+{
+"jersey number": 55,
+"dribbling": 66,
+"pace": 33,
+"name": "irn",
+"defending": 55,
+"position": "FORWARD",
+"passing": 55,
+"physicality": 44,
+"age": 66,
+"shot": 44
+}
+]

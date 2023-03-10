@@ -42,7 +42,7 @@ public class ListOfTeams implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns things in this listOfTeams as a JSON array
     private JSONArray teamsToJson() {
         JSONArray jsonArray = new JSONArray();
 
