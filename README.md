@@ -36,3 +36,8 @@ to recreate some of my favourite professional teams.
 - As a user, I want to have the option to save my team to file
 - As a user, I want to have the option to load previous teams from file, or pick up where I left off if the team
 was uncompleted.
+
+
+## Citations:
+All classes in persistence packages (both in testing and model) were inspired/based on JsonSerializationDemo provided by
+the UBC CPSC 210 team.

@@ -8,7 +8,7 @@ import static java.lang.Math.round;
 // represents a outfield player (IE. non-goalie player) having a name, jersey number, age, position
 // and ratings for the following metrics; pace, shot, passing, dribbling, physicality
 // and defending.
-public class OutfieldPlayer implements Writable, Player {
+public class OutfieldPlayer implements Player, Writable {
 
     private String name;
     private int jerseyNumber;
