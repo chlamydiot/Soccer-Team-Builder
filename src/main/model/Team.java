@@ -19,6 +19,9 @@ public class Team implements Writable {
     private ArrayList<OutfieldPlayer> teamMidfielders;
     private  ArrayList<OutfieldPlayer> teamForwards;
 
+    //REQUIRES: formation is one of FourThreeThree, FourFourTwo, ThreeFiveTwo
+    //EFFECTS: Constructs team with Team name set to name, Team formation set to formation, with empty lists of
+    //team members, defenders, midfielders, and forwards.
     public Team(String name, Formation formation) {
         this.teamName = name;
         this.formation = formation;

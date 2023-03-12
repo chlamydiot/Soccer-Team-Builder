@@ -136,6 +136,7 @@ public class Goalie implements Player, Writable {
         return (int) round(ratingFromFive + ratingForSpeed);
     }
 
+    //EFFECTS: Returns this as a json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -8,11 +8,12 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
-//A list of teams which have been built so far
+//Represents a list of teams which have been built so far
 public class ListOfTeams implements Writable {
     private ArrayList<Team> teamsSoFar;
     private String collectionName;
 
+    //EFFECTS: constructs empty list of teams with label collectionName
     public ListOfTeams() {
         this.teamsSoFar = new ArrayList<Team>();
         this.collectionName = "Teams Built So Far";
@@ -34,6 +35,8 @@ public class ListOfTeams implements Writable {
         return collectionName;
     }
 
+
+    //EFFECTS: Returns this as a json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

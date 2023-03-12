@@ -160,6 +160,7 @@ public class OutfieldPlayer implements Player, Writable {
         return 0;
     }
 
+    //EFFECTS: Returns this as a json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
