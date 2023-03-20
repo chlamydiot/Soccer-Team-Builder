@@ -5,6 +5,7 @@ import model.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -20,7 +21,7 @@ public class TeamBuilderApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    //EFFECTS:
+    //EFFECTS: Instantiates a list of teams and runs the team builder app.
     public TeamBuilderApp() {
         teamsSoFar = new ListOfTeams();
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -32,7 +33,7 @@ public class TeamBuilderApp {
     //MODIFIES: this
     //EFFECTS: Returns a team previously built for user to view.
     private void retrieveTeam(ListOfTeams teamsSoFar) {
-        ArrayList listOfNames = new ArrayList();
+        ArrayList<String> listOfNames = new ArrayList<>();
         ArrayList<Team> teams = teamsSoFar.getTeams();
         for (Team team : teams) {
             listOfNames.add(team.getName());
@@ -53,7 +54,7 @@ public class TeamBuilderApp {
     //MODIFIES: this
     //EFFECTS: Processes user input.
     private void runApp() {
-        Boolean keepRunning = true;
+        boolean keepRunning = true;
         String command;
         userInput = new Scanner(System.in);
         userInput.useDelimiter("\n");
@@ -76,7 +77,7 @@ public class TeamBuilderApp {
         System.out.println("\nWelcome to Team Builder! Please input your team name:");
         String teamName = userInput.next();
 
-        if (teamName != "") {
+        if (!Objects.equals(teamName, "")) {
             System.out.println("Your team name is: " + teamName);
             createTeam(teamName);
         } else {
@@ -150,6 +151,14 @@ public class TeamBuilderApp {
         pos = processPosition(position);
         Player player = createPlayer(pos);
 
+        addPlayerByFormation(myTeam, player);
+        printTeamInfo(myTeam);
+        System.out.println("You've currently added " + myTeam.getTeamMembers().size() + " "
+                + "out of 11 players to your team!");
+        buildTeam(myTeam);
+    }
+
+    private void addPlayerByFormation(Team myTeam, Player player) {
         if (myTeam.getFormation().equals(Formation.FourThreeThree)) {
             myTeam.addPlayer433(player);
         } else if (myTeam.getFormation().equals(Formation.FourFourTwo)) {
@@ -157,10 +166,6 @@ public class TeamBuilderApp {
         } else if (myTeam.getFormation().equals(Formation.ThreeFiveTwo)) {
             myTeam.addPlayer352(player);
         }
-        printTeamInfo(myTeam);
-        System.out.println("You've currently added " + myTeam.getTeamMembers().size() + " "
-                + "out of 11 players to your team!");
-        buildTeam(myTeam);
     }
 
     //EFFECTS: Prints out team info describing number of players in each position added to team so far.
@@ -184,6 +189,13 @@ public class TeamBuilderApp {
         playerToEdit = createPlayer(playerToEdit.getPosition());
         myTeam.getTeamMembers().add(indexToEdit, playerToEdit);
 
+        editPlayerByPosition(myTeam, indexToEdit, playerToEdit);
+
+        System.out.println("Player successfully edited!");
+        buildTeam(myTeam);
+    }
+
+    private void editPlayerByPosition(Team myTeam, int indexToEdit, Player playerToEdit) {
         if (playerToEdit.getPosition().equals(Position.GOALTENDER)) {
             myTeam.setTeamGoaltender(playerToEdit);
         } else if (playerToEdit.getPosition().equals(Position.DEFENDER)) {
@@ -193,9 +205,6 @@ public class TeamBuilderApp {
         } else {
             myTeam.getTeamForwards().add(indexToEdit, (OutfieldPlayer) playerToEdit);
         }
-
-        System.out.println("Player successfully edited!");
-        buildTeam(myTeam);
     }
 
     //REQUIRES: pos is one of: GOALTENDER, DEFENDER, MIDFIELDER, FORWARD
@@ -267,14 +276,19 @@ public class TeamBuilderApp {
     //EFFECTS: Sets player position based on user input.
     private Position processPosition(String input) {
         Position pos = null;
-        if (input.equals("gk")) {
-            pos = Position.GOALTENDER;
-        } else if (input.equals("def")) {
-            pos = Position.DEFENDER;
-        } else if (input.equals("mid")) {
-            pos = Position.MIDFIELDER;
-        } else if (input.equals("fwd")) {
-            pos = Position.FORWARD;
+        switch (input) {
+            case "gk":
+                pos = Position.GOALTENDER;
+                break;
+            case "def":
+                pos = Position.DEFENDER;
+                break;
+            case "mid":
+                pos = Position.MIDFIELDER;
+                break;
+            case "fwd":
+                pos = Position.FORWARD;
+                break;
         }
         return pos;
     }
@@ -282,16 +296,22 @@ public class TeamBuilderApp {
     //MODIFIES: this
     //EFFECTS: processes user command
     private void process(String command) {
-        if (command.equals("bt")) {
-            createTeamName();
-        } else if (command.equals("v")) {
-            retrieveTeam(teamsSoFar);
-        } else if (command.equals("s")) {
-            saveWorkRoom();
-        } else if (command.equals("l")) {
-            loadWorkRoom();
-        } else {
-            System.out.println("Selection not valid");
+        switch (command) {
+            case "bt":
+                createTeamName();
+                break;
+            case "v":
+                retrieveTeam(teamsSoFar);
+                break;
+            case "s":
+                saveWorkRoom();
+                break;
+            case "l":
+                loadWorkRoom();
+                break;
+            default:
+                System.out.println("Selection not valid");
+                break;
         }
     }
 
