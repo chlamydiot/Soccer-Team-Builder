@@ -18,6 +18,7 @@ public class TeamBuilderAppUI extends JFrame {
     private TeamBuilderApp teamBuilder;
     private JDesktopPane container;
     private JInternalFrame teamBuilderInterface;
+    private JInternalFrame soccerImage;
 
     public TeamBuilderAppUI(int w, int h) {
         width = w;
@@ -41,11 +42,35 @@ public class TeamBuilderAppUI extends JFrame {
         setLocationRelativeTo(null);
         initializeMenuBar();
         initializeTeamBuilderInterface();
+        initializeImage();
         setVisible(true);
+
+        //TODO I want to add a popup window below the main manu which appears when adding or editing players,
+        //Then maybe adding an icon onto the soccer field image? IDK how to do this.
+    }
+
+    private void initializeImage() {
+        soccerImage = new JInternalFrame();
+        soccerImage.setLayout(new BorderLayout());
+        add(soccerImage, BorderLayout.EAST);
+
+        JLabel label = new JLabel(); //JLabel Creation
+        ImageIcon soccerField = new ImageIcon("data/soccerfield.jpg");
+        Image img = soccerField.getImage();
+        Image newImg = img.getScaledInstance(335, 670, Image.SCALE_SMOOTH);
+        soccerField = new ImageIcon(newImg);
+
+        label.setIcon(soccerField); //Sets the image to be displayed as an icon
+        Dimension size = label.getPreferredSize(); //Gets the size of the image
+        label.setBounds(200, 0, size.width, size.height); //Sets the location of the image
+        add(label, BorderLayout.EAST);
+
+        soccerImage.pack();
+        soccerImage.setVisible(true);
     }
 
     private void initializeTeamBuilderInterface() {
-        teamBuilderInterface = new JInternalFrame();
+        teamBuilderInterface = new JInternalFrame("Main Menu");
         teamBuilderInterface.setLayout(new BorderLayout());
         add(teamBuilderInterface, BorderLayout.WEST);
 
@@ -82,9 +107,9 @@ public class TeamBuilderAppUI extends JFrame {
         buttonPanel.setLayout(new GridLayout(5,1));
         buttonPanel.add(new JButton(new BuildTeam()));
         buttonPanel.add(new JButton(new ViewTeams()));
-        buttonPanel.add(new JButton(new Quit()));
         buttonPanel.add(new JButton(new SaveTeams()));
         buttonPanel.add(new JButton(new LoadTeams()));
+        buttonPanel.add(new JButton(new Quit()));
 
         teamBuilderInterface.add(buttonPanel, BorderLayout.WEST);
     }
