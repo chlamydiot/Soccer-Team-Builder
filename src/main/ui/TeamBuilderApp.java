@@ -334,7 +334,7 @@ public class TeamBuilderApp {
     }
 
     // EFFECTS: saves the workroom to file
-    private void saveWorkRoom() {
+    public void saveWorkRoom() {
         try {
             jsonWriter.open();
             jsonWriter.write(teamsSoFar);
