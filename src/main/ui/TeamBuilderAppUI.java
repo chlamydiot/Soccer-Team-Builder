@@ -4,14 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import ui.TeamBuilderApp;
 import model.*;
+import persistence.*;
 
 public class TeamBuilderAppUI extends JFrame {
 
     private int width;
     private int height;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/teamsdata.json";
     private JButton button;
     private MyActionListener mal;
     private MyActionListener saveListener;
@@ -19,6 +24,7 @@ public class TeamBuilderAppUI extends JFrame {
     private JDesktopPane container;
     private JInternalFrame teamBuilderInterface;
     private JInternalFrame soccerImage;
+    private ListOfTeams teamsSoFar;
 
     public TeamBuilderAppUI(int w, int h) {
         width = w;
@@ -26,6 +32,7 @@ public class TeamBuilderAppUI extends JFrame {
         button = new JButton("Start");
         mal = new MyActionListener();
         saveListener = new MyActionListener();
+        teamsSoFar = new ListOfTeams();
 
         setUpGUI();
     }
@@ -50,23 +57,23 @@ public class TeamBuilderAppUI extends JFrame {
     }
 
     private void initializeImage() {
-        soccerImage = new JInternalFrame();
-        soccerImage.setLayout(new BorderLayout());
-        add(soccerImage, BorderLayout.EAST);
+//        soccerImage = new JInternalFrame();
+//        soccerImage.setLayout(new BorderLayout());
+//        add(soccerImage, BorderLayout.EAST);
 
-        JLabel label = new JLabel(); //JLabel Creation
+        JLabel fieldPanel = new JLabel(); //JLabel Creation
         ImageIcon soccerField = new ImageIcon("data/soccerfield.jpg");
         Image img = soccerField.getImage();
-        Image newImg = img.getScaledInstance(335, 670, Image.SCALE_SMOOTH);
+        Image newImg = img.getScaledInstance(320, 650, Image.SCALE_SMOOTH);
         soccerField = new ImageIcon(newImg);
 
-        label.setIcon(soccerField); //Sets the image to be displayed as an icon
-        Dimension size = label.getPreferredSize(); //Gets the size of the image
-        label.setBounds(200, 0, size.width, size.height); //Sets the location of the image
-        add(label, BorderLayout.EAST);
+        fieldPanel.setIcon(soccerField); //Setting the image to be displayed as an icon
+        Dimension size = fieldPanel.getPreferredSize(); //Getting the size of the image
+        fieldPanel.setBounds(200, 0, size.width, size.height); //Setting the location of the image
+        add(fieldPanel, BorderLayout.EAST);
 
-        soccerImage.pack();
-        soccerImage.setVisible(true);
+//        soccerImage.pack();
+//        soccerImage.setVisible(true);
     }
 
     private void initializeTeamBuilderInterface() {
@@ -122,7 +129,31 @@ public class TeamBuilderAppUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            {
+                JTextField teamName = new JTextField(10);
+                Formation[] formations;
+                formations = new Formation[]{Formation.FourThreeThree, Formation.FourFourTwo, Formation.ThreeFiveTwo};
+                JComboBox<Formation> formation = new JComboBox<>(formations);
 
+                JPanel options = new JPanel();
+                options.add(new JLabel("Team Name: "));
+                options.add(teamName);
+                options.add(new JLabel("Team Formation: "));
+                options.add(formation);
+
+                int result = JOptionPane.showConfirmDialog(null, options, "Please Enter Team Name"
+                        + " and " + "Team Formation: ", JOptionPane.OK_CANCEL_OPTION);
+
+                if (result == JOptionPane.OK_OPTION) {
+                    System.out.println("Team Name Is: " + teamName.getText());
+                    System.out.println("Formations Is: " + formation.getSelectedItem());
+                    Team myTeam = new Team(teamName.getText(), (Formation) formation.getSelectedItem());
+
+                    //TODO add action for then adding and editing players, after setting name and form
+                    //TODO could add the name and formation onto the image of the field, and maybe add empty circles
+                    //TODO with different positions based on formation selected.
+                }
+            }
         }
     }
 
@@ -158,7 +189,15 @@ public class TeamBuilderAppUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ListOfTeams teamsSoFar = new ListOfTeams();
+            try {
+                jsonWriter.open();
+                jsonWriter.write(teamsSoFar);
+                jsonWriter.close();
+                System.out.println("Saved " + teamsSoFar.getName() + " to " + JSON_STORE);
+            } catch (FileNotFoundException exception) {
+                System.out.println("Unable to write to file: " + JSON_STORE);
+            }
         }
     }
 
