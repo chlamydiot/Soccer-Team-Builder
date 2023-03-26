@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import ui.TeamBuilderApp;
 import model.*;
@@ -22,12 +23,16 @@ public class TeamBuilderAppUI extends JFrame {
     private JInternalFrame teamBuilderInterface;
     private JInternalFrame soccerImage;
     private JInternalFrame addPlayerEditPlayerInterface;
+    private JInternalFrame rightPanel;
+    private JProgressBar progressBar;
     private ListOfTeams teamsSoFar;
 
     public TeamBuilderAppUI(int w, int h) {
         width = w;
         height = h;
         teamsSoFar = new ListOfTeams();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
         setUpGUI();
     }
@@ -82,15 +87,21 @@ public class TeamBuilderAppUI extends JFrame {
         teamBuilderInterface.setVisible(true);
     }
 
+    //TODO add functionality for progressing bar each time player is added
     private void addRightPanel() {
-        JInternalFrame rightPanel = new JInternalFrame("Team Building Progress");
-        JProgressBar progressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,  11);
+        rightPanel = new JInternalFrame("Team Building Progress");
+        rightPanel.setLayout(new GridLayout(3, 1));
+        JLabel ratingLabel = new JLabel("Current Team Rating: ");
+        JLabel formationLabel = new JLabel("Selected Formation: ");
+        progressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,  11);
         progressBar.setBounds(40, 40, 160, 30);
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
 
         rightPanel.setSize(180, 180);
         rightPanel.add(progressBar);
+        rightPanel.add(formationLabel);
+        rightPanel.add(ratingLabel);
         rightPanel.setVisible(true);
         rightPanel.pack();
         rightPanel.setLocation(520, 0);
@@ -131,7 +142,7 @@ public class TeamBuilderAppUI extends JFrame {
     }
 
     private void initializeAddPlayerEditPlayer() {
-        addPlayerEditPlayerInterface = new JInternalFrame();
+        addPlayerEditPlayerInterface = new JInternalFrame("Add or Edit Player");
         addPlayerEditPlayerInterface.setLayout(new GridLayout(2, 1));
         JButton addPlayer = new JButton(new AddPlayer());
         JButton editPlayer = new JButton(new EditPlayer());
@@ -165,20 +176,19 @@ public class TeamBuilderAppUI extends JFrame {
 
             if (posSelected == JOptionPane.OK_OPTION) {
                 Position pos = (Position) positionOptions.getSelectedItem();
-                Team myTeam = (Team) teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams() - 1);
+                Team myTeam = teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams() - 1);
 
                 if (pos == Position.GOALTENDER) {
-                    createGoalie(pos, myTeam);
+                    createGoalie(myTeam);
                 } else {
-                    createPlayer(pos);
+                    createPlayer(pos, myTeam);
                 }
             }
         }
     }
 
     @SuppressWarnings({"MethodLength", "checkstyle:SuppressWarnings"})
-    private Goalie createGoalie(Position position, Team myTeam) {
-        //Need to then have a pop up window for goalie metrics, then add to myTeam
+    private Goalie createGoalie(Team myTeam) {
         JTextField playerName = new JTextField(10);
         JTextField playerAge = new JTextField(10);
         JTextField playerJN = new JTextField(10);
@@ -220,11 +230,25 @@ public class TeamBuilderAppUI extends JFrame {
                     Integer.parseInt(goalieReflex.getText()), Integer.parseInt(goalieSpeed.getText()),
                     Integer.parseInt(goaliePositioning.getText()));
             addPlayerToTeam(goalie, myTeam);
+            addToProgressBar();
         }
         return null;
         //TODO add player icon to field when added to team, create box on right side with team rating and formation
         //TODO player icon should display either jersey num or rating, in the players corresponding position.
         //TODO exception for not fully enterint player metrics?
+    }
+
+    private void addToProgressBar() {
+
+        while (progressBar.getValue() <= 11) {
+            int current = progressBar.getValue();
+            progressBar.setValue(current + 1);
+            break;
+        }
+        if (progressBar.getValue() > 11) {
+            progressBar.setValue(0);
+        }
+
     }
 
     private void addPlayerToTeam(Player player, Team myTeam) {
@@ -273,8 +297,51 @@ public class TeamBuilderAppUI extends JFrame {
 //        return goaliePanel;
 //    }
 
-    private OutfieldPlayer createPlayer(Position position) {
-        return null;
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    private void createPlayer(Position position, Team myTeam) {
+        JTextField playerName = new JTextField(10);
+        JTextField playerAge = new JTextField(10);
+        JTextField playerJN = new JTextField(10);
+        JTextField playerPace = new JTextField(10);
+        JTextField playerShot = new JTextField(10);
+        JTextField playerPassing = new JTextField(10);
+        JTextField playerDribbling = new JTextField(10);
+        JTextField playerPhys = new JTextField(10);
+        JTextField playerDefending = new JTextField(10);
+
+        JPanel playerPanel = new JPanel();
+        playerPanel.setLayout(new GridLayout(9, 1));
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " name: "));
+        playerPanel.add(playerName);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " age: "));
+        playerPanel.add(playerAge);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Jersey Number: "));
+        playerPanel.add(playerJN);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Pace Rating: "));
+        playerPanel.add(playerPace);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Shot Rating: "));
+        playerPanel.add(playerShot);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Passing Rating: "));
+        playerPanel.add(playerPassing);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Dribbling Rating: "));
+        playerPanel.add(playerDribbling);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Physicality Rating: "));
+        playerPanel.add(playerPhys);
+        playerPanel.add(new JLabel("Please enter " + position + "'s" + " Defending Rating: "));
+        playerPanel.add(playerDefending);
+
+        int result = JOptionPane.showConfirmDialog(null, playerPanel, "Please Enter"
+                + " Player Metrics", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            Player player = new OutfieldPlayer(playerName.getText(), Integer.parseInt(playerAge.getText()),
+                    Integer.parseInt(playerJN.getText()), position, Integer.parseInt(playerPace.getText()),
+                    Integer.parseInt(playerShot.getText()), Integer.parseInt(playerPassing.getText()),
+                    Integer.parseInt(playerDribbling.getText()), Integer.parseInt(playerPhys.getText()),
+                    Integer.parseInt(playerDribbling.getText()));
+            addPlayerToTeam(player, myTeam);
+            addToProgressBar();
+        }
     }
 
     private class EditPlayer extends AbstractAction {
@@ -336,7 +403,9 @@ public class TeamBuilderAppUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            System.out.println(teamsSoFar.getNumberOfTeams());
+            //TODO make pop-up window with either message saying there are no teams, or an interface displaying each
+            //TODO team previously made
         }
     }
 
@@ -360,7 +429,6 @@ public class TeamBuilderAppUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ListOfTeams teamsSoFar = new ListOfTeams();
             try {
                 jsonWriter.open();
                 jsonWriter.write(teamsSoFar);
@@ -380,7 +448,12 @@ public class TeamBuilderAppUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            try {
+                teamsSoFar = jsonReader.read();
+                System.out.println("Loaded " + teamsSoFar.getName() + " from " + JSON_STORE);
+            } catch (IOException exception) {
+                System.out.println("Unable to read from file: " + JSON_STORE);
+            }
         }
     }
 }

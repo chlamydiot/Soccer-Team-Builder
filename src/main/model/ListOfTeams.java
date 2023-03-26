@@ -27,7 +27,7 @@ public class ListOfTeams implements Writable {
         teamsSoFar.add(team);
     }
 
-    public ArrayList getTeams() {
+    public ArrayList<Team> getTeams() {
         return teamsSoFar;
     }
 

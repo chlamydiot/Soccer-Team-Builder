@@ -64,11 +64,13 @@ public class TeamBuilderApp {
             command = command.toLowerCase();
             if (command.equals("q")) {
                 keepRunning = false;
+                break;
             } else {
                 process(command);
             }
         }
         System.out.println("Bye!");
+
     }
 
     //MODIFIES: this
