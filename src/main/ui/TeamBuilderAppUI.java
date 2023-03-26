@@ -34,6 +34,7 @@ public class TeamBuilderAppUI extends JFrame {
 
     public void setUpGUI() {
         container = new JDesktopPane();
+        //container.setLayout(new GridBagLayout());
         setContentPane(container);
         setSize(width, height);
         setTitle("Personal Project: Team Builder");
@@ -75,9 +76,25 @@ public class TeamBuilderAppUI extends JFrame {
         add(teamBuilderInterface, BorderLayout.WEST);
 
         addBuildingOptions();
+        addRightPanel();
 
         teamBuilderInterface.pack();
         teamBuilderInterface.setVisible(true);
+    }
+
+    private void addRightPanel() {
+        JInternalFrame rightPanel = new JInternalFrame("Team Building Progress");
+        JProgressBar progressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,  11);
+        progressBar.setBounds(40, 40, 160, 30);
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+
+        rightPanel.setSize(180, 180);
+        rightPanel.add(progressBar);
+        rightPanel.setVisible(true);
+        rightPanel.pack();
+        rightPanel.setLocation(520, 0);
+        add(rightPanel);
     }
 
     //EFFECTS: adds menu bar to the team builder frame
