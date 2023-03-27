@@ -103,7 +103,7 @@ public class Team implements Writable {
     //REQUIRES: defNum, midNum, fwdNum > 0.
     //MODIFIES: this
     //EFFECTS: adds player to the team, if number of players in the given position is less than
-    //its alloted number in the formation (IE. less than defNum, midNum or fwdNum). Also adds player to the
+    //its allotted number in the formation (IE. less than defNum, midNum or fwdNum). Also adds player to the
     //list of other players in the team sharing the position.
     public void addPlayer(Player player, int defNum, int midNum, int fwdNum) {
         if (player.getPosition().equals(Position.GOALTENDER)) {
