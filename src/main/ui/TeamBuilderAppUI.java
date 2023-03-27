@@ -13,15 +13,12 @@ import persistence.*;
 
 public class TeamBuilderAppUI extends JFrame {
 
-    private int width;
-    private int height;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final int width;
+    private final int height;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
     private static final String JSON_STORE = "./data/teamsdata.json";
-    private JDesktopPane container;
     private JInternalFrame teamBuilderInterface;
-    private JInternalFrame addPlayerEditPlayerInterface;
-    private JInternalFrame rightPanel;
     private JProgressBar progressBar;
     private ListOfTeams teamsSoFar;
 
@@ -36,7 +33,7 @@ public class TeamBuilderAppUI extends JFrame {
     }
 
     public void setUpGUI() {
-        container = new JDesktopPane();
+        JDesktopPane container = new JDesktopPane();
         //container.setLayout(new GridBagLayout());
         setContentPane(container);
         setSize(width, height);
@@ -87,7 +84,7 @@ public class TeamBuilderAppUI extends JFrame {
 
     //TODO add functionality for progressing bar each time player is added
     private void addRightPanel() {
-        rightPanel = new JInternalFrame("Team Building Progress");
+        JInternalFrame rightPanel = new JInternalFrame("Team Building Progress");
         rightPanel.setLayout(new GridLayout(3, 1));
         JLabel ratingLabel = new JLabel("Current Team Rating: ");
         JLabel formationLabel = new JLabel("Selected Formation: ");
@@ -140,7 +137,7 @@ public class TeamBuilderAppUI extends JFrame {
     }
 
     private void initializeAddPlayerEditPlayer() {
-        addPlayerEditPlayerInterface = new JInternalFrame("Add or Edit Player");
+        JInternalFrame addPlayerEditPlayerInterface = new JInternalFrame("Add or Edit Player");
         addPlayerEditPlayerInterface.setLayout(new GridLayout(2, 1));
         JButton addPlayer = new JButton(new AddPlayer());
         JButton editPlayer = new JButton(new EditPlayer());
@@ -364,9 +361,6 @@ public class TeamBuilderAppUI extends JFrame {
             System.out.println(teamsSoFar.getNumberOfTeams());
             //TODO make pop-up window with either message saying there are no teams, or an interface displaying each
             //TODO team previously made
-
-            JOptionPane viewTeams = new JOptionPane("View Teams");
-
             if (teamsSoFar.getNumberOfTeams() == 0) {
                 JOptionPane.showMessageDialog(null, "No teams built yet! "
                         + "Please make a team then try again!", "error", JOptionPane.WARNING_MESSAGE);
@@ -388,7 +382,7 @@ public class TeamBuilderAppUI extends JFrame {
 //                        //}
 //                    }
                     JOptionPane.showMessageDialog(null, teamsMessage,
-                            "View Teams", JOptionPane.OK_CANCEL_OPTION);
+                            "View Teams", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -420,7 +414,7 @@ public class TeamBuilderAppUI extends JFrame {
                 jsonWriter.close();
                 System.out.println("Saved " + teamsSoFar.getName() + " to " + JSON_STORE);
                 JOptionPane.showMessageDialog(null, "Saved " + teamsSoFar.getName()
-                        + " to " + JSON_STORE, null, JOptionPane.OK_OPTION);
+                        + " to " + JSON_STORE, null, JOptionPane.INFORMATION_MESSAGE);
             } catch (FileNotFoundException exception) {
                 System.out.println("Unable to write to file: " + JSON_STORE);
             }
@@ -439,7 +433,7 @@ public class TeamBuilderAppUI extends JFrame {
                 teamsSoFar = jsonReader.read();
                 System.out.println("Loaded " + teamsSoFar.getName() + " from " + JSON_STORE);
                 JOptionPane.showMessageDialog(null, "Loaded " + teamsSoFar.getName()
-                        + " from " + JSON_STORE, null, JOptionPane.OK_OPTION);
+                        + " from " + JSON_STORE, null, JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException exception) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
             }
