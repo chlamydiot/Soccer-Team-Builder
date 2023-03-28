@@ -322,7 +322,33 @@ public class TeamBuilderAppUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO
+            editPlayer(teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams() - 1));
+        }
+    }
+
+    private void editPlayer(Team myTeam) {
+        JPanel playersOnTeam = new JPanel(new GridLayout(4, 1));
+        playersOnTeam.add(new JLabel("Players on Team :" + myTeam.getMemberNames()));
+        playersOnTeam.add(new JLabel("Player Ratings :" + myTeam.getRatings(myTeam)));
+        JTextField playerToEdit = new JTextField(10);
+        playersOnTeam.add(new JLabel("Enter player name to edit: "));
+        playersOnTeam.add(playerToEdit);
+        JOptionPane.showConfirmDialog(null, playersOnTeam, "Player Editing", JOptionPane.OK_CANCEL_OPTION);
+
+        String playerName = playerToEdit.getText();
+        Player playerToBeEdited = null;
+        Position pos = null;
+        for (Player player : myTeam.getTeamMembers()) {
+            if (player.getName().equals(playerName)) {
+                playerToBeEdited = player;
+                pos = playerToBeEdited.getPosition();
+            }
+        }
+        myTeam.removePlayer(playerToBeEdited);
+        if (pos.equals(Position.GOALTENDER)) {
+            createGoalie(myTeam);
+        } else {
+            createPlayer(pos, myTeam);
         }
     }
 
@@ -382,13 +408,16 @@ public class TeamBuilderAppUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "No teams built yet! "
                         + "Please make a team then try again!", "error", JOptionPane.WARNING_MESSAGE);
             } else {
-                JPanel teamsMessage = new JPanel();
+                JPanel teamsMessage = new JPanel(new GridLayout(teamsSoFar.getNumberOfTeams(), 1));
                 ArrayList<JButton> eachTeamButton = new ArrayList<>();
                 for (Team team : teamsSoFar.getTeams()) {
                     JButton eachTeam = new JButton("View Details");
+                    JButton teamEditing = new JButton("Edit");
                     teamsMessage.add(new JLabel("Team : " + team.getName()));
                     teamsMessage.add(eachTeam);
+                    teamsMessage.add(teamEditing);
                     eachTeam.addActionListener(e1 -> teamInfo(team));
+                    teamEditing.addActionListener(e1 -> editPlayer(team));
                     //TODO could maybe have the button be labeled as "edit team", then if clicked will bring team up on
                     //TODO field and you can select players to be edited.
                     eachTeamButton.add(eachTeam);
