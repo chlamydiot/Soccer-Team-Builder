@@ -1,280 +1,547 @@
 {
-    "teams": [{
-        "team name": "f",
-        "team members": [
-            {
-                "handlingRating": 4,
-                "name": "j",
-                "jerseyNumber": 2,
-                "speedRating": 7,
-                "position": "GOALTENDER",
-                "reflexRating": 6,
-                "diveRating": 3,
-                "positioningRating": 8,
-                "kickRating": 5,
-                "age": 1
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "g",
-                "jerseyNumber": 1,
-                "position": "DEFENDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "h",
-                "jerseyNumber": 1,
-                "position": "DEFENDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "b",
-                "jerseyNumber": 1,
-                "position": "DEFENDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "n",
-                "jerseyNumber": 1,
-                "position": "DEFENDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "x",
-                "jerseyNumber": 1,
-                "position": "MIDFIELDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "k",
-                "jerseyNumber": 1,
-                "position": "MIDFIELDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "p",
-                "jerseyNumber": 1,
-                "position": "MIDFIELDER",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "u",
-                "jerseyNumber": 1,
-                "position": "FORWARD",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "f",
-                "jerseyNumber": 1,
-                "position": "FORWARD",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "physicalityRating": 7,
-                "dribblingRating": 6,
-                "paceRating": 3,
-                "passingRating": 5,
-                "name": "i",
-                "jerseyNumber": 1,
-                "position": "FORWARD",
-                "defendingRating": 6,
-                "shotRating": 4,
-                "age": 2
-            },
-            {
-                "handlingRating": 4,
-                "name": "n",
-                "jerseyNumber": 2,
-                "speedRating": 7,
-                "position": "GOALTENDER",
-                "reflexRating": 6,
-                "diveRating": 3,
-                "positioningRating": 8,
-                "kickRating": 5,
-                "age": 1
-            }
-        ],
-        "formation": "FourThreeThree",
-        "team midfielders": [
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "x",
-                "defending": 6,
-                "position": "MIDFIELDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "k",
-                "defending": 6,
-                "position": "MIDFIELDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "p",
-                "defending": 6,
-                "position": "MIDFIELDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            }
-        ],
-        "team defenders": [
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "g",
-                "defending": 6,
-                "position": "DEFENDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "h",
-                "defending": 6,
-                "position": "DEFENDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "b",
-                "defending": 6,
-                "position": "DEFENDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "n",
-                "defending": 6,
-                "position": "DEFENDER",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            }
-        ],
-        "team goalie": "model.Goalie@68059894",
-        "team forwards": [
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "u",
-                "defending": 6,
-                "position": "FORWARD",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "f",
-                "defending": 6,
-                "position": "FORWARD",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            },
-            {
-                "jersey number": 1,
-                "dribbling": 6,
-                "pace": 3,
-                "name": "i",
-                "defending": 6,
-                "position": "FORWARD",
-                "passing": 5,
-                "physicality": 7,
-                "age": 2,
-                "shot": 4
-            }
-        ]
-    }],
+    "teams": [
+        {
+            "team name": "f",
+            "team members": [
+                {
+                    "handlingRating": 4,
+                    "name": "j",
+                    "jerseyNumber": 1,
+                    "speedRating": 7,
+                    "position": "GOALTENDER",
+                    "reflexRating": 6,
+                    "positioningRating": 8,
+                    "diveRating": 3,
+                    "age": 2,
+                    "kickRating": 5
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "g",
+                    "jerseyNumber": 1,
+                    "position": "DEFENDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "h",
+                    "jerseyNumber": 1,
+                    "position": "DEFENDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "b",
+                    "jerseyNumber": 1,
+                    "position": "DEFENDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "n",
+                    "jerseyNumber": 1,
+                    "position": "DEFENDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "x",
+                    "jerseyNumber": 1,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "k",
+                    "jerseyNumber": 1,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "p",
+                    "jerseyNumber": 1,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "u",
+                    "jerseyNumber": 1,
+                    "position": "FORWARD",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "f",
+                    "jerseyNumber": 1,
+                    "position": "FORWARD",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 6,
+                    "paceRating": 3,
+                    "passingRating": 5,
+                    "name": "i",
+                    "jerseyNumber": 1,
+                    "position": "FORWARD",
+                    "defendingRating": 6,
+                    "shotRating": 4,
+                    "age": 2
+                },
+                {
+                    "handlingRating": 4,
+                    "name": "n",
+                    "jerseyNumber": 1,
+                    "speedRating": 7,
+                    "position": "GOALTENDER",
+                    "reflexRating": 6,
+                    "positioningRating": 8,
+                    "diveRating": 3,
+                    "age": 2,
+                    "kickRating": 5
+                }
+            ],
+            "formation": "FourThreeThree",
+            "team midfielders": [
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "x",
+                    "defending": 6,
+                    "position": "MIDFIELDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "k",
+                    "defending": 6,
+                    "position": "MIDFIELDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "p",
+                    "defending": 6,
+                    "position": "MIDFIELDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                }
+            ],
+            "team defenders": [
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "g",
+                    "defending": 6,
+                    "position": "DEFENDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "h",
+                    "defending": 6,
+                    "position": "DEFENDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "b",
+                    "defending": 6,
+                    "position": "DEFENDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "n",
+                    "defending": 6,
+                    "position": "DEFENDER",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                }
+            ],
+            "team goalie": "model.Goalie@136a224c",
+            "team forwards": [
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "u",
+                    "defending": 6,
+                    "position": "FORWARD",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "f",
+                    "defending": 6,
+                    "position": "FORWARD",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                },
+                {
+                    "jersey number": 1,
+                    "dribbling": 6,
+                    "pace": 3,
+                    "name": "i",
+                    "defending": 6,
+                    "position": "FORWARD",
+                    "passing": 5,
+                    "physicality": 7,
+                    "age": 2,
+                    "shot": 4
+                }
+            ]
+        },
+        {
+            "team name": "Liverpool",
+            "team members": [
+                {
+                    "handlingRating": 99,
+                    "name": "Allison",
+                    "jerseyNumber": 88,
+                    "speedRating": 88,
+                    "position": "GOALTENDER",
+                    "reflexRating": 99,
+                    "positioningRating": 77,
+                    "diveRating": 77,
+                    "age": 29,
+                    "kickRating": 88
+                },
+                {
+                    "physicalityRating": 88,
+                    "dribblingRating": 77,
+                    "paceRating": 87,
+                    "passingRating": 89,
+                    "name": "TAA ",
+                    "jerseyNumber": 24,
+                    "position": "DEFENDER",
+                    "defendingRating": 77,
+                    "shotRating": 88,
+                    "age": 66
+                },
+                {
+                    "physicalityRating": 98,
+                    "dribblingRating": 87,
+                    "paceRating": 98,
+                    "passingRating": 67,
+                    "name": "Virg",
+                    "jerseyNumber": 29,
+                    "position": "DEFENDER",
+                    "defendingRating": 87,
+                    "shotRating": 77,
+                    "age": 4
+                },
+                {
+                    "physicalityRating": 89,
+                    "dribblingRating": 87,
+                    "paceRating": 77,
+                    "passingRating": 77,
+                    "name": "Joel",
+                    "jerseyNumber": 30,
+                    "position": "DEFENDER",
+                    "defendingRating": 87,
+                    "shotRating": 88,
+                    "age": 23
+                },
+                {
+                    "physicalityRating": 98,
+                    "dribblingRating": 78,
+                    "paceRating": 98,
+                    "passingRating": 87,
+                    "name": "Robbo",
+                    "jerseyNumber": 26,
+                    "position": "DEFENDER",
+                    "defendingRating": 78,
+                    "shotRating": 87,
+                    "age": 26
+                },
+                {
+                    "physicalityRating": 89,
+                    "dribblingRating": 87,
+                    "paceRating": 77,
+                    "passingRating": 77,
+                    "name": "Thiago",
+                    "jerseyNumber": 31,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 87,
+                    "shotRating": 88,
+                    "age": 25
+                },
+                {
+                    "physicalityRating": 78,
+                    "dribblingRating": 87,
+                    "paceRating": 55,
+                    "passingRating": 97,
+                    "name": "Fab",
+                    "jerseyNumber": 31,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 87,
+                    "shotRating": 78,
+                    "age": 3
+                },
+                {
+                    "physicalityRating": 88,
+                    "dribblingRating": 99,
+                    "paceRating": 88,
+                    "passingRating": 88,
+                    "name": "Bellingham",
+                    "jerseyNumber": 19,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 99,
+                    "shotRating": 77,
+                    "age": 22
+                },
+                {
+                    "physicalityRating": 88,
+                    "dribblingRating": 87,
+                    "paceRating": 98,
+                    "passingRating": 89,
+                    "name": "Mo",
+                    "jerseyNumber": 30,
+                    "position": "FORWARD",
+                    "defendingRating": 87,
+                    "shotRating": 89,
+                    "age": 11
+                },
+                {
+                    "physicalityRating": 77,
+                    "dribblingRating": 88,
+                    "paceRating": 99,
+                    "passingRating": 99,
+                    "name": "Nunez",
+                    "jerseyNumber": 23,
+                    "position": "FORWARD",
+                    "defendingRating": 88,
+                    "shotRating": 88,
+                    "age": 27
+                },
+                {
+                    "physicalityRating": 99,
+                    "dribblingRating": 88,
+                    "paceRating": 77,
+                    "passingRating": 99,
+                    "name": "IDK",
+                    "jerseyNumber": 87,
+                    "position": "MIDFIELDER",
+                    "defendingRating": 88,
+                    "shotRating": 88,
+                    "age": 88
+                }
+            ],
+            "formation": "FourFourTwo",
+            "team midfielders": [
+                {
+                    "jersey number": 31,
+                    "dribbling": 87,
+                    "pace": 77,
+                    "name": "Thiago",
+                    "defending": 87,
+                    "position": "MIDFIELDER",
+                    "passing": 77,
+                    "physicality": 89,
+                    "age": 25,
+                    "shot": 88
+                },
+                {
+                    "jersey number": 31,
+                    "dribbling": 87,
+                    "pace": 55,
+                    "name": "Fab",
+                    "defending": 87,
+                    "position": "MIDFIELDER",
+                    "passing": 97,
+                    "physicality": 78,
+                    "age": 3,
+                    "shot": 78
+                },
+                {
+                    "jersey number": 19,
+                    "dribbling": 99,
+                    "pace": 88,
+                    "name": "Bellingham",
+                    "defending": 99,
+                    "position": "MIDFIELDER",
+                    "passing": 88,
+                    "physicality": 88,
+                    "age": 22,
+                    "shot": 77
+                },
+                {
+                    "jersey number": 87,
+                    "dribbling": 88,
+                    "pace": 77,
+                    "name": "IDK",
+                    "defending": 88,
+                    "position": "MIDFIELDER",
+                    "passing": 99,
+                    "physicality": 99,
+                    "age": 88,
+                    "shot": 88
+                }
+            ],
+            "team defenders": [
+                {
+                    "jersey number": 24,
+                    "dribbling": 77,
+                    "pace": 87,
+                    "name": "TAA ",
+                    "defending": 77,
+                    "position": "DEFENDER",
+                    "passing": 89,
+                    "physicality": 88,
+                    "age": 66,
+                    "shot": 88
+                },
+                {
+                    "jersey number": 29,
+                    "dribbling": 87,
+                    "pace": 98,
+                    "name": "Virg",
+                    "defending": 87,
+                    "position": "DEFENDER",
+                    "passing": 67,
+                    "physicality": 98,
+                    "age": 4,
+                    "shot": 77
+                },
+                {
+                    "jersey number": 30,
+                    "dribbling": 87,
+                    "pace": 77,
+                    "name": "Joel",
+                    "defending": 87,
+                    "position": "DEFENDER",
+                    "passing": 77,
+                    "physicality": 89,
+                    "age": 23,
+                    "shot": 88
+                },
+                {
+                    "jersey number": 26,
+                    "dribbling": 78,
+                    "pace": 98,
+                    "name": "Robbo",
+                    "defending": 78,
+                    "position": "DEFENDER",
+                    "passing": 87,
+                    "physicality": 98,
+                    "age": 26,
+                    "shot": 87
+                }
+            ],
+            "team goalie": "model.Goalie@5775522d",
+            "team forwards": [
+                {
+                    "jersey number": 30,
+                    "dribbling": 87,
+                    "pace": 98,
+                    "name": "Mo",
+                    "defending": 87,
+                    "position": "FORWARD",
+                    "passing": 89,
+                    "physicality": 88,
+                    "age": 11,
+                    "shot": 89
+                },
+                {
+                    "jersey number": 23,
+                    "dribbling": 88,
+                    "pace": 99,
+                    "name": "Nunez",
+                    "defending": 88,
+                    "position": "FORWARD",
+                    "passing": 99,
+                    "physicality": 77,
+                    "age": 27,
+                    "shot": 88
+                }
+            ]
+        }
+    ],
     "name": "Teams Built So Far"
 }

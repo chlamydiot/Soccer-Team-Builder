@@ -369,11 +369,12 @@ public class TeamBuilderAppUI extends JFrame {
                 ArrayList<JButton> eachTeamButton = new ArrayList<>();
                 for (Team team : teamsSoFar.getTeams()) {
                     JButton eachTeam = new JButton("View Details");
-                    //TODO could maybe have the button be labeled as "view', then could update the soccer field icons
-                    //TODO and right panel with the details for that team.
-                    eachTeamButton.add(eachTeam);
                     teamsMessage.add(new JLabel("Team : " + team.getName()));
                     teamsMessage.add(eachTeam);
+                    eachTeam.addActionListener(e1 -> teamInfo(team));
+                    //TODO could maybe have the button be labeled as "edit team", then if clicked will bring team up on
+                    //TODO field and you can select players to be edited.
+                    eachTeamButton.add(eachTeam);
 //                    for (JButton button : eachTeamButton) {
 //                        //for (int num = 1; num <= teamsSoFar.getNumberOfTeams(); num++) {
 //                        teamsMessage.add(new JLabel("Team : " + team.getName()));
@@ -381,9 +382,9 @@ public class TeamBuilderAppUI extends JFrame {
 //
 //                        //}
 //                    }
-                    JOptionPane.showMessageDialog(null, teamsMessage,
-                            "View Teams", JOptionPane.INFORMATION_MESSAGE);
                 }
+                JOptionPane.showMessageDialog(null, teamsMessage,
+                        "View Teams", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
@@ -403,7 +404,7 @@ public class TeamBuilderAppUI extends JFrame {
     private class SaveTeams extends AbstractAction {
 
         SaveTeams() {
-            super("Save Team");
+            super("Save Teams");
         }
 
         @Override
@@ -440,7 +441,24 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
-    private void teamInfo() {
-        //TODO
+    private void teamInfo(Team myTeam) {
+        JPanel teamInfo = new JPanel(new GridLayout(7, 1));
+        teamInfo.add(new JLabel("Team name: " + myTeam.getName()));
+        teamInfo.add(new JLabel("Team formation: " + myTeam.getFormation()));
+        teamInfo.add(new JLabel("Team rating: " + myTeam.teamRating()));
+        teamInfo.add(new JLabel("Team goaltender: " + myTeam.getGoaltender().getName()));
+        teamInfo.add(new JLabel("Team defenders: " + getNames(myTeam.getDefenders())));
+        teamInfo.add(new JLabel("Team midfielders: " + getNames(myTeam.getMidfielders())));
+        teamInfo.add(new JLabel("Team forwards: " + getNames(myTeam.getTeamForwards())));
+
+        JOptionPane.showMessageDialog(null, teamInfo, myTeam.getName(), JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private ArrayList<String> getNames(ArrayList<OutfieldPlayer> players) {
+        ArrayList playerNames = new ArrayList<>();
+        for (OutfieldPlayer player : players) {
+            playerNames.add(player.getName());
+        }
+        return playerNames;
     }
 }
