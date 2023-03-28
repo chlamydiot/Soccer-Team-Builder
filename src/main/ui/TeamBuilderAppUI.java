@@ -82,16 +82,17 @@ public class TeamBuilderAppUI extends JFrame {
         teamBuilderInterface.setVisible(true);
     }
 
-    //TODO add functionality for progressing bar each time player is added
     private void addRightPanel() {
-        JInternalFrame rightPanel = new JInternalFrame("Team Building Progress");
+        JInternalFrame rightPanel = new JInternalFrame("Team in Progress");
         rightPanel.setLayout(new GridLayout(3, 1));
-        JLabel ratingLabel = new JLabel("Current Team Rating: ");
-        JLabel formationLabel = new JLabel("Selected Formation: ");
+        JLabel ratingLabel = new JLabel("Current Team Rating: "
+                + getCurrentTeamRating());
+        JLabel formationLabel = new JLabel("Selected Formation: "
+                + getCurrentFormation());
         progressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,  11);
         progressBar.setBounds(40, 40, 160, 30);
         progressBar.setValue(0);
-        progressBar.setStringPainted(true);
+        progressBar.setStringPainted(false);
 
         rightPanel.setSize(180, 180);
         rightPanel.add(progressBar);
@@ -101,6 +102,22 @@ public class TeamBuilderAppUI extends JFrame {
         rightPanel.pack();
         rightPanel.setLocation(520, 0);
         add(rightPanel);
+    }
+
+    private int getCurrentTeamRating() {
+        int rating = 0;
+        if (teamsSoFar.getNumberOfTeams() != 0) {
+            rating = teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams()).teamRating();
+        }
+        return rating;
+    }
+
+    private Formation getCurrentFormation() {
+        Formation form = null;
+        if (teamsSoFar.getNumberOfTeams() != 0) {
+            form = teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams()).getFormation();
+        }
+        return form;
     }
 
     //EFFECTS: adds menu bar to the team builder frame
