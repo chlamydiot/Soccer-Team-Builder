@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import model.*;
 import persistence.*;
 
+//TODO class and method comments for requires, modifies, effects
+
+//Soccer team builder GUI application
 public class TeamBuilderAppUI extends JFrame {
 
     private final int width;
@@ -21,6 +24,8 @@ public class TeamBuilderAppUI extends JFrame {
     private JProgressBar progressBar;
     private ListOfTeams teamsSoFar;
 
+    //EFFECTS: Instantiates GUI with specified width and height, and instantiates a list of teams build and json
+    //writer and reader instances for persistence
     public TeamBuilderAppUI(int w, int h) {
         width = w;
         height = h;
@@ -31,6 +36,7 @@ public class TeamBuilderAppUI extends JFrame {
         setUpGUI();
     }
 
+    //EFFECTS: Instantiates GUI window, loads in menu bar, main menu interface, and soccer field image
     public void setUpGUI() {
         JDesktopPane container = new JDesktopPane();
         setContentPane(container);
@@ -48,11 +54,24 @@ public class TeamBuilderAppUI extends JFrame {
         //TODO Then maybe adding an icon onto the soccer field image? IDK how to do this.
     }
 
-    private void initializeImage() {
-//        soccerImage = new JInternalFrame();
-//        soccerImage.setLayout(new BorderLayout());
-//        add(soccerImage, BorderLayout.EAST);
+    //EFFECTS: adds menu bar to the team builder frame
+    private void initializeMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
 
+        JMenu menuFile = new JMenu("File");
+        JMenuItem menuItemSave = new JMenuItem("Save Team");
+        menuItemSave.addActionListener(e1 -> saveTeams());
+        JMenuItem menuItemLoad = new JMenuItem("Load Teams");
+        menuItemLoad.addActionListener(e1 -> loadTeams());
+        menuFile.add(menuItemSave);
+        menuFile.add(menuItemLoad);
+        menuBar.add(menuFile);
+
+        setJMenuBar(menuBar);
+    }
+
+    //EFFECTS: Instantiates soccer field image
+    private void initializeImage() {
         JLabel fieldPanel = new JLabel(); //JLabel Creation
         ImageIcon soccerField = new ImageIcon("data/soccerfield.jpg");
         Image img = soccerField.getImage();
@@ -63,11 +82,9 @@ public class TeamBuilderAppUI extends JFrame {
         Dimension size = fieldPanel.getPreferredSize(); //Getting the size of the image
         fieldPanel.setBounds(200, 0, size.width, size.height); //Setting the location of the image
         add(fieldPanel, BorderLayout.EAST);
-
-//        soccerImage.pack();
-//        soccerImage.setVisible(true);
     }
 
+    //EFFECTS: Instantiates main menu with building options: build team, view teams, save teams, load teams and quit
     private void initializeTeamBuilderInterface() {
         teamBuilderInterface = new JInternalFrame("Main Menu");
         teamBuilderInterface.setLayout(new BorderLayout());
@@ -80,6 +97,22 @@ public class TeamBuilderAppUI extends JFrame {
         teamBuilderInterface.setVisible(true);
     }
 
+    //EFFECTS: adds button panel to main menu
+    private void addBuildingOptions() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(5,1));
+        buttonPanel.add(new JButton(new BuildTeam()));
+        buttonPanel.add(new JButton(new ViewTeams()));
+        buttonPanel.add(new JButton(new SaveTeams()));
+        buttonPanel.add(new JButton(new LoadTeams()));
+        buttonPanel.add(new JButton(new Quit()));
+
+        teamBuilderInterface.add(buttonPanel, BorderLayout.WEST);
+    }
+
+    //REQUIRES: formation is one of FourThreeThree, FourFourTwo, ThreeFiveTwo. teamName is not an empty string
+    //EFFECTS: Instantiates right panel of GUI displaying name/formation of team currently being built, as well as
+    //option to edit a player on the team or view the team as of current.
     private void addRightPanel(Formation formation, String teamName) {
         JInternalFrame rightPanel = new JInternalFrame("Team in Progress");
         rightPanel.setLayout(new GridLayout(6, 1));
@@ -106,40 +139,15 @@ public class TeamBuilderAppUI extends JFrame {
         add(rightPanel);
     }
 
-    //EFFECTS: adds menu bar to the team builder frame
-    private void initializeMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-
-        JMenu menuFile = new JMenu("File");
-        JMenuItem menuItemSave = new JMenuItem("Save Team");
-        menuItemSave.addActionListener(e1 -> saveTeam());
-        JMenuItem menuItemLoad = new JMenuItem("Load Teams");
-        menuItemLoad.addActionListener(e1 -> loadTeam());
-        menuFile.add(menuItemSave);
-        menuFile.add(menuItemLoad);
-        menuBar.add(menuFile);
-
-        setJMenuBar(menuBar);
-    }
-
-    private void addBuildingOptions() {
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5,1));
-        buttonPanel.add(new JButton(new BuildTeam()));
-        buttonPanel.add(new JButton(new ViewTeams()));
-        buttonPanel.add(new JButton(new SaveTeams()));
-        buttonPanel.add(new JButton(new LoadTeams()));
-        buttonPanel.add(new JButton(new Quit()));
-
-        teamBuilderInterface.add(buttonPanel, BorderLayout.WEST);
-    }
-
+    //Instantiates AddPlayer button and defines event performed upon action event
     private class AddPlayer extends AbstractAction {
 
+        //EFFECTS: Creates a button with an action to add player to team
         AddPlayer() {
             super("Add Player to Team");
         }
 
+        //EFFECTS: Creates window prompting user to enter player position to be used for player creation
         @Override
         public void actionPerformed(ActionEvent e) {
             Position[] positions;
@@ -166,6 +174,8 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
+    //MODIFIES: myTeam
+    //EFFECTS: Creates an instance of a Goalie to be added to myTeam and increments progress bar
     @SuppressWarnings({"MethodLength", "checkstyle:SuppressWarnings"})
     private void createGoalie(Team myTeam) {
         JTextField playerName = new JTextField(10);
@@ -216,24 +226,9 @@ public class TeamBuilderAppUI extends JFrame {
         //TODO exception for not fully enterint player metrics?
     }
 
-    private void addToProgressBar() {
-        while (progressBar.getValue() <= 11) {
-            int current = progressBar.getValue();
-            progressBar.setValue(current + 1);
-            break;
-        }
-    }
-
-    private void addPlayerToTeam(Player player, Team myTeam) {
-        if (myTeam.getFormation().equals(Formation.FourThreeThree)) {
-            myTeam.addPlayer433(player);
-        } else if (myTeam.getFormation().equals(Formation.FourFourTwo)) {
-            myTeam.addPlayer442(player);
-        } else if (myTeam.getFormation().equals(Formation.ThreeFiveTwo)) {
-            myTeam.addPlayer352(player);
-        }
-    }
-
+    //REQUIRES: position is one of: GOALTENDER, DEFENDER, MIDFIELDER, FORWARD
+    //MODIFIES: myTeam
+    //EFFECTS: Creates instance of player with position, adds player to myTeam and increments progress bar
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void createPlayer(Position position, Team myTeam) {
         JTextField playerName = new JTextField(10);
@@ -281,18 +276,47 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
+    //MODIFIES: myTeam
+    //EFFECTS: Adds player to myTeam based on myTeam formation
+    private void addPlayerToTeam(Player player, Team myTeam) {
+        if (myTeam.getFormation().equals(Formation.FourThreeThree)) {
+            myTeam.addPlayer433(player);
+        } else if (myTeam.getFormation().equals(Formation.FourFourTwo)) {
+            myTeam.addPlayer442(player);
+        } else if (myTeam.getFormation().equals(Formation.ThreeFiveTwo)) {
+            myTeam.addPlayer352(player);
+        }
+    }
+
+    //EFFECTS: Increments progress bar representing team building progress
+    private void addToProgressBar() {
+        while (progressBar.getValue() <= 11) {
+            int current = progressBar.getValue();
+            progressBar.setValue(current + 1);
+            break;
+        }
+    }
+
+    ////Represents EditPlayer button and defines event performed upon action event
     private class EditPlayer extends AbstractAction {
 
+        //EFFECTS: Creates button with action to edit player on team
         EditPlayer() {
             super("Edit Player On Team");
         }
 
+        //REQUIRES: teamsSoFar is not empty
+        //MODIFIES: myTeam
+        //EFFECTS: Edits specified player on current team being built
         @Override
         public void actionPerformed(ActionEvent e) {
             editPlayer(teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams() - 1));
         }
     }
 
+    //MODIFIES: myTeam
+    //EFFECTS: Creates window showing players currently on the team with their corresponding ratings, removes specified
+    //player from the team and creates new player to replace this removed player
     private void editPlayer(Team myTeam) {
         JPanel playersOnTeam = new JPanel(new GridLayout(4, 1));
         playersOnTeam.add(new JLabel("Players on Team :" + myTeam.getMemberNames()));
@@ -319,12 +343,16 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
+    //Instantiates BuildTeam button and defines event performed upon action event
     private class BuildTeam extends AbstractAction {
 
+        //EFFECTS: Creates a button with event to build team
         BuildTeam() {
             super("Build Team");
         }
 
+        //EFFECTS: Creates window prompting user to enter team name and formation, then creates an instance of Team
+        //with the specified name and formation. adds this team to teamsSoFar. Initialized progress bar value to 0.
         @Override
         public void actionPerformed(ActionEvent e) {
             {
@@ -346,6 +374,7 @@ public class TeamBuilderAppUI extends JFrame {
                     System.out.println("Team Name Is: " + teamName.getText());
                     System.out.println("Formations Is: " + formation.getSelectedItem());
                     Team myTeam = new Team(teamName.getText(), (Formation) formation.getSelectedItem());
+
                     teamsSoFar.addTeamToList(myTeam);
                     addRightPanel(myTeam.getFormation(), myTeam.getName());
 
@@ -359,12 +388,17 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
+    //Instantiates ViewTeams button and defines event performed upon action event
     private class ViewTeams extends AbstractAction {
 
+        //EFFECTS: Creates a button with action event of viewing teams previously built
         ViewTeams() {
             super("View Teams Previously Built");
         }
 
+        //EFFECTS: Displays a window telling user no teams built yet if teamsSoFar is empty. Otherwise creates
+        //a panel displaying each team in teamsSoFar with corresponding buttons for viewing team details and editing
+        //players on each team in teamsSoFar.
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println(teamsSoFar.getNumberOfTeams());
@@ -373,7 +407,6 @@ public class TeamBuilderAppUI extends JFrame {
                         + "Please make a team then try again!", "error", JOptionPane.WARNING_MESSAGE);
             } else {
                 JPanel teamsMessage = new JPanel(new GridLayout(teamsSoFar.getNumberOfTeams(), 1));
-                ArrayList<JButton> eachTeamButton = new ArrayList<>();
                 for (Team team : teamsSoFar.getTeams()) {
                     JButton eachTeam = new JButton("View Details");
                     JButton teamEditing = new JButton("Edit");
@@ -384,7 +417,6 @@ public class TeamBuilderAppUI extends JFrame {
                     teamEditing.addActionListener(e1 -> editPlayer(team));
                     //TODO could maybe have the button be labeled as "edit team", then if clicked will bring team up on
                     //TODO field and you can select players to be edited.
-                    eachTeamButton.add(eachTeam);
                 }
                 JOptionPane.showMessageDialog(null, teamsMessage,
                         "View Teams", JOptionPane.INFORMATION_MESSAGE);
@@ -392,31 +424,38 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
-    private class Quit extends AbstractAction {
+    //Instantiates Quit button and defines event performed upon action event
+    private static class Quit extends AbstractAction {
 
+        //EFFECTS: Creates a button with event of quitting application
         Quit() {
             super("Quit");
         }
 
+        //EFFECTS: Quits and closes application
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
 
+    //Instantiates SaveTeams button and defines event performed upon action event
     private class SaveTeams extends AbstractAction {
 
+        //EFFECTS: Creates a button with the event of saving teams built to file
         SaveTeams() {
             super("Save Teams");
         }
 
+        //EFFECTS: Saves teams to json file
         @Override
         public void actionPerformed(ActionEvent e) {
-            saveTeam();
+            saveTeams();
         }
     }
 
-    private void saveTeam() {
+    //EFFECTS: saves teams to file
+    private void saveTeams() {
         try {
             jsonWriter.open();
             jsonWriter.write(teamsSoFar);
@@ -429,19 +468,23 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
+    //Instantiates LoadTeams button and defines event performed upon action event
     private class LoadTeams extends AbstractAction {
 
+        //EFFECTS: Creates a button with event of loading teams from file
         LoadTeams() {
             super("Load Teams");
         }
 
+        //EFFECTS: loads teams from file
         @Override
         public void actionPerformed(ActionEvent e) {
-            loadTeam();
+            loadTeams();
         }
     }
 
-    private void loadTeam() {
+    //EFFECTS: loads teams from file
+    private void loadTeams() {
         try {
             teamsSoFar = jsonReader.read();
             System.out.println("Loaded " + teamsSoFar.getName() + " from " + JSON_STORE);
@@ -452,6 +495,8 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
+    //EFFECTS: Creates window displaying the following information pertaining to myTeam: name, formation, rating
+    //goaltender, names of defenders, names of midfielders, names of forwards
     private void teamInfo(Team myTeam) {
         JPanel teamInfo = new JPanel(new GridLayout(7, 1));
         teamInfo.add(new JLabel("Team name: " + myTeam.getName()));
@@ -465,8 +510,9 @@ public class TeamBuilderAppUI extends JFrame {
         JOptionPane.showMessageDialog(null, teamInfo, myTeam.getName(), JOptionPane.INFORMATION_MESSAGE);
     }
 
+    //EFFECTS: Returns an array list with names of each player in players
     private ArrayList<String> getNames(ArrayList<OutfieldPlayer> players) {
-        ArrayList playerNames = new ArrayList<>();
+        ArrayList<String> playerNames = new ArrayList<>();
         for (OutfieldPlayer player : players) {
             playerNames.add(player.getName());
         }
