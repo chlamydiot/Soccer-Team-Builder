@@ -20,8 +20,6 @@ public class TeamBuilderAppUI extends JFrame {
     private JInternalFrame teamBuilderInterface;
     private JProgressBar progressBar;
     private ListOfTeams teamsSoFar;
-    private Formation currentForm;
-    private int currentRating;
 
     public TeamBuilderAppUI(int w, int h) {
         width = w;
@@ -35,7 +33,6 @@ public class TeamBuilderAppUI extends JFrame {
 
     public void setUpGUI() {
         JDesktopPane container = new JDesktopPane();
-        //container.setLayout(new GridBagLayout());
         setContentPane(container);
         setSize(width, height);
         setTitle("Personal Project: Team Builder");
@@ -83,15 +80,14 @@ public class TeamBuilderAppUI extends JFrame {
         teamBuilderInterface.setVisible(true);
     }
 
-    private void addRightPanel(Formation formation, int rating) {
+    private void addRightPanel(Formation formation, String teamName) {
         JInternalFrame rightPanel = new JInternalFrame("Team in Progress");
-        rightPanel.setLayout(new GridLayout(5, 1));
-        JLabel ratingLabel = new JLabel("Current Team Rating: "
-                + rating);
-        JLabel formationLabel = new JLabel("Selected Formation: "
-                + formation);
+        rightPanel.setLayout(new GridLayout(6, 1));
+        JLabel nameLabel = new JLabel("Team Name: " + teamName);
+        JLabel formationLabel = new JLabel("Selected Formation: " + formation);
         JButton addPlayer = new JButton(new AddPlayer());
         JButton editPlayer = new JButton(new EditPlayer());
+        JButton seeTeam = new JButton(new ViewTeams());
         progressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,  11);
         progressBar.setBounds(40, 40, 160, 30);
         progressBar.setValue(0);
@@ -99,30 +95,15 @@ public class TeamBuilderAppUI extends JFrame {
 
         rightPanel.setSize(180, 180);
         rightPanel.add(progressBar);
+        rightPanel.add(nameLabel);
         rightPanel.add(formationLabel);
-        rightPanel.add(ratingLabel);
         rightPanel.add(addPlayer);
         rightPanel.add(editPlayer);
+        rightPanel.add(seeTeam);
         rightPanel.setVisible(true);
         rightPanel.pack();
         rightPanel.setLocation(520, 0);
         add(rightPanel);
-    }
-
-    private int getCurrentTeamRating() {
-        int rating = 0;
-        if (teamsSoFar.getNumberOfTeams() != 0) {
-            rating = teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams() - 1).teamRating();
-        }
-        return rating;
-    }
-
-    private Formation getCurrentFormation() {
-        Formation form = null;
-        if (teamsSoFar.getNumberOfTeams() != 0) {
-            form = teamsSoFar.getTeams().get(teamsSoFar.getNumberOfTeams() - 1).getFormation();
-        }
-        return form;
     }
 
     //EFFECTS: adds menu bar to the team builder frame
@@ -152,20 +133,6 @@ public class TeamBuilderAppUI extends JFrame {
 
         teamBuilderInterface.add(buttonPanel, BorderLayout.WEST);
     }
-
-//    private void initializeAddPlayerEditPlayer() {
-//        JInternalFrame addPlayerEditPlayerInterface = new JInternalFrame("Add or Edit Player");
-//        addPlayerEditPlayerInterface.setLayout(new GridLayout(2, 1));
-//        JButton addPlayer = new JButton(new AddPlayer());
-//        JButton editPlayer = new JButton(new EditPlayer());
-//        addPlayerEditPlayerInterface.add(addPlayer);
-//        addPlayerEditPlayerInterface.add(editPlayer);
-//
-//        addPlayerEditPlayerInterface.setLocation(520, 100);
-//        add(addPlayerEditPlayerInterface);
-//        addPlayerEditPlayerInterface.pack();
-//        addPlayerEditPlayerInterface.setVisible(true);
-//    }
 
     private class AddPlayer extends AbstractAction {
 
@@ -380,8 +347,7 @@ public class TeamBuilderAppUI extends JFrame {
                     System.out.println("Formations Is: " + formation.getSelectedItem());
                     Team myTeam = new Team(teamName.getText(), (Formation) formation.getSelectedItem());
                     teamsSoFar.addTeamToList(myTeam);
-                    //initializeAddPlayerEditPlayer();
-                    addRightPanel(myTeam.getFormation(), 0);
+                    addRightPanel(myTeam.getFormation(), myTeam.getName());
 
                     //TODO add action for then adding and editing players, after setting name and form
                     //TODO could add the name and formation onto the image of the field, and maybe add empty circles
