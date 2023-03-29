@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import model.*;
 import persistence.*;
 
-//TODO class and method comments for requires, modifies, effects
-
 //Soccer team builder GUI application
 public class TeamBuilderAppUI extends JFrame {
 
