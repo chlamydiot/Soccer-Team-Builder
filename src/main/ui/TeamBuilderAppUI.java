@@ -173,7 +173,6 @@ public class TeamBuilderAppUI extends JFrame {
 
     //MODIFIES: myTeam
     //EFFECTS: Creates an instance of a Goalie to be added to myTeam and increments progress bar
-    @SuppressWarnings({"MethodLength", "checkstyle:SuppressWarnings"})
     private void createGoalie(Team myTeam) {
         JTextField playerName = new JTextField(10);
         JTextField playerAge = new JTextField(10);
@@ -185,6 +184,27 @@ public class TeamBuilderAppUI extends JFrame {
         JTextField goalieSpeed = new JTextField(10);
         JTextField goaliePositioning = new JTextField(10);
 
+        JPanel goaliePanel = getjPanelGoalie(playerName, playerAge, playerJN, goalieDive,
+                goalieHandle, goalieKick, goalieReflex, goalieSpeed, goaliePositioning);
+
+        int result = JOptionPane.showConfirmDialog(null, goaliePanel, "Please Enter"
+                + " Goalie Metrics", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            Goalie goalie = new Goalie(playerName.getText(), Integer.parseInt(playerAge.getText()),
+                    Integer.parseInt(playerJN.getText()), Integer.parseInt(goalieDive.getText()),
+                    Integer.parseInt(goalieHandle.getText()), Integer.parseInt(goalieKick.getText()),
+                    Integer.parseInt(goalieReflex.getText()), Integer.parseInt(goalieSpeed.getText()),
+                    Integer.parseInt(goaliePositioning.getText()));
+            addPlayerToTeam(goalie, myTeam);
+            addToProgressBar();
+        }
+    }
+
+    //EFFECTS: returns Jpanel pertaining to goalie metrics.
+    private JPanel getjPanelGoalie(JTextField playerName, JTextField playerAge, JTextField playerJN,
+                                   JTextField goalieDive, JTextField goalieHandle, JTextField goalieKick,
+                                   JTextField goalieReflex, JTextField goalieSpeed, JTextField goaliePositioning) {
         JPanel goaliePanel = new JPanel();
         goaliePanel.setLayout(new GridLayout(9, 1));
         goaliePanel.add(new JLabel("Please Enter Goalie name: "));
@@ -205,25 +225,12 @@ public class TeamBuilderAppUI extends JFrame {
         goaliePanel.add(goalieSpeed);
         goaliePanel.add(new JLabel("Please enter Goalie Positioning Rating: "));
         goaliePanel.add(goaliePositioning);
-
-        int result = JOptionPane.showConfirmDialog(null, goaliePanel, "Please Enter"
-                + " Goalie Metrics", JOptionPane.OK_CANCEL_OPTION);
-
-        if (result == JOptionPane.OK_OPTION) {
-            Goalie goalie = new Goalie(playerName.getText(), Integer.parseInt(playerAge.getText()),
-                    Integer.parseInt(playerJN.getText()), Integer.parseInt(goalieDive.getText()),
-                    Integer.parseInt(goalieHandle.getText()), Integer.parseInt(goalieKick.getText()),
-                    Integer.parseInt(goalieReflex.getText()), Integer.parseInt(goalieSpeed.getText()),
-                    Integer.parseInt(goaliePositioning.getText()));
-            addPlayerToTeam(goalie, myTeam);
-            addToProgressBar();
-        }
+        return goaliePanel;
     }
 
     //REQUIRES: position is one of: GOALTENDER, DEFENDER, MIDFIELDER, FORWARD
     //MODIFIES: myTeam
     //EFFECTS: Creates instance of player with position, adds player to myTeam and increments progress bar
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void createPlayer(Position position, Team myTeam) {
         JTextField playerName = new JTextField(10);
         JTextField playerAge = new JTextField(10);
@@ -235,6 +242,29 @@ public class TeamBuilderAppUI extends JFrame {
         JTextField playerPhys = new JTextField(10);
         JTextField playerDefending = new JTextField(10);
 
+        JPanel playerPanel = getjPanelPlayer(position, playerName, playerAge, playerJN,
+                playerPace, playerShot, playerPassing, playerDribbling, playerPhys, playerDefending);
+
+        int result = JOptionPane.showConfirmDialog(null, playerPanel, "Please Enter"
+                + " Player Metrics", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            Player player = new OutfieldPlayer(playerName.getText(), Integer.parseInt(playerAge.getText()),
+                    Integer.parseInt(playerJN.getText()), position, Integer.parseInt(playerPace.getText()),
+                    Integer.parseInt(playerShot.getText()), Integer.parseInt(playerPassing.getText()),
+                    Integer.parseInt(playerDribbling.getText()), Integer.parseInt(playerPhys.getText()),
+                    Integer.parseInt(playerDribbling.getText()));
+            addPlayerToTeam(player, myTeam);
+            addToProgressBar();
+        }
+    }
+
+    //REQUIRES: position is one of: DEFENDER, MIDFIELDER, FORWARD
+    //EFFECTS: Returns JPanel pertaining to player metrics.
+    private JPanel getjPanelPlayer(Position position, JTextField playerName,
+                                   JTextField playerAge, JTextField playerJN, JTextField playerPace,
+                                   JTextField playerShot, JTextField playerPassing, JTextField playerDribbling,
+                                   JTextField playerPhys, JTextField playerDefending) {
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new GridLayout(9, 1));
         playerPanel.add(new JLabel("Please enter " + position + "'s" + " name: "));
@@ -255,19 +285,7 @@ public class TeamBuilderAppUI extends JFrame {
         playerPanel.add(playerPhys);
         playerPanel.add(new JLabel("Please enter " + position + "'s" + " Defending Rating: "));
         playerPanel.add(playerDefending);
-
-        int result = JOptionPane.showConfirmDialog(null, playerPanel, "Please Enter"
-                + " Player Metrics", JOptionPane.OK_CANCEL_OPTION);
-
-        if (result == JOptionPane.OK_OPTION) {
-            Player player = new OutfieldPlayer(playerName.getText(), Integer.parseInt(playerAge.getText()),
-                    Integer.parseInt(playerJN.getText()), position, Integer.parseInt(playerPace.getText()),
-                    Integer.parseInt(playerShot.getText()), Integer.parseInt(playerPassing.getText()),
-                    Integer.parseInt(playerDribbling.getText()), Integer.parseInt(playerPhys.getText()),
-                    Integer.parseInt(playerDribbling.getText()));
-            addPlayerToTeam(player, myTeam);
-            //addToProgressBar();
-        }
+        return playerPanel;
     }
 
     //MODIFIES: myTeam
