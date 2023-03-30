@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import model.*;
 import persistence.*;
 
+//TODO add player icon to field when added to team
+
 //Soccer team builder GUI application
 public class TeamBuilderAppUI extends JFrame {
 
@@ -47,9 +49,6 @@ public class TeamBuilderAppUI extends JFrame {
         initializeTeamBuilderInterface();
         initializeImage();
         setVisible(true);
-
-        //TODO I want to add a popup window below the main manu which appears when adding or editing players,
-        //TODO Then maybe adding an icon onto the soccer field image? IDK how to do this.
     }
 
     //EFFECTS: adds menu bar to the team builder frame
@@ -219,9 +218,6 @@ public class TeamBuilderAppUI extends JFrame {
             addPlayerToTeam(goalie, myTeam);
             addToProgressBar();
         }
-        //TODO add player icon to field when added to team, create box on right side with team rating and formation
-        //TODO player icon should display either jersey num or rating, in the players corresponding position.
-        //TODO exception for not fully enterint player metrics?
     }
 
     //REQUIRES: position is one of: GOALTENDER, DEFENDER, MIDFIELDER, FORWARD
@@ -289,12 +285,13 @@ public class TeamBuilderAppUI extends JFrame {
     //EFFECTS: Increments progress bar representing team building progress
     private void addToProgressBar() throws NullPointerException {
         try {
-            while (progressBar.getValue() <= 11) {
+            if (progressBar.getValue() <= 11) {
                 int current = progressBar.getValue();
                 progressBar.setValue(current + 1);
-                break;
+            } else {
+                progressBar.setValue(0);
             }
-            progressBar.setValue(0);
+
         } catch (NullPointerException e) {
             //Do nothing
         }
@@ -328,12 +325,13 @@ public class TeamBuilderAppUI extends JFrame {
             JTextField playerToEdit = new JTextField(10);
             playersOnTeam.add(new JLabel("Enter player name to edit: "));
             playersOnTeam.add(playerToEdit);
-            JOptionPane.showConfirmDialog(null, playersOnTeam, "Player Editing", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(null, playersOnTeam,
+                    "Player Editing", JOptionPane.OK_CANCEL_OPTION);
 
             String playerName = playerToEdit.getText().toLowerCase();
             edit(myTeam, playerName);
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "No Player Edited", null, JOptionPane.INFORMATION_MESSAGE);
+            //Do Nothing
         }
     }
 
@@ -390,11 +388,6 @@ public class TeamBuilderAppUI extends JFrame {
 
                     teamsSoFar.addTeamToList(myTeam);
                     addRightPanel(myTeam.getFormation(), myTeam.getName());
-
-                    //TODO add action for then adding and editing players, after setting name and form
-                    //TODO could add the name and formation onto the image of the field, and maybe add empty circles
-                    //TODO with different positions based on formation selected. Pop up window for adding and editing
-                    //TODO players???
                 }
                 progressBar.setValue(0);
             }
@@ -428,8 +421,6 @@ public class TeamBuilderAppUI extends JFrame {
                     teamsMessage.add(teamEditing);
                     eachTeam.addActionListener(e1 -> teamInfo(team));
                     teamEditing.addActionListener(e1 -> editPlayer(team));
-                    //TODO could maybe have the button be labeled as "edit team", then if clicked will bring team up on
-                    //TODO field and you can select players to be edited.
                 }
                 JOptionPane.showMessageDialog(null, teamsMessage,
                         "View Teams", JOptionPane.INFORMATION_MESSAGE);
@@ -515,12 +506,21 @@ public class TeamBuilderAppUI extends JFrame {
         teamInfo.add(new JLabel("Team name: " + myTeam.getName()));
         teamInfo.add(new JLabel("Team formation: " + myTeam.getFormation()));
         teamInfo.add(new JLabel("Team rating: " + myTeam.teamRating()));
-        teamInfo.add(new JLabel("Team goaltender: " + myTeam.getGoaltender().getName()));
+        teamInfo.add(new JLabel("Team goaltender: " + getGoalieNameIfExists(myTeam)));
         teamInfo.add(new JLabel("Team defenders: " + getNames(myTeam.getDefenders())));
         teamInfo.add(new JLabel("Team midfielders: " + getNames(myTeam.getMidfielders())));
         teamInfo.add(new JLabel("Team forwards: " + getNames(myTeam.getTeamForwards())));
 
         JOptionPane.showMessageDialog(null, teamInfo, myTeam.getName(), JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    //EFFECTS: Returns "" if myTeam does not have a goalie and returns Goaltender name if it does.
+    private String getGoalieNameIfExists(Team myTeam) {
+        if (myTeam.getGoaltender() == null) {
+            return "";
+        } else {
+            return myTeam.getGoaltender().getName();
+        }
     }
 
     //EFFECTS: Returns an array list with names of each player in players
