@@ -56,19 +56,19 @@ public class Team implements Writable {
         this.teamGoaltender = player;
     }
 
-    public void setTeamDefenders(ArrayList defenders) {
+    public void setTeamDefenders(ArrayList<OutfieldPlayer> defenders) {
         this.teamDefenders = defenders;
     }
 
-    public void setTeamMidfielders(ArrayList midfielders) {
+    public void setTeamMidfielders(ArrayList<OutfieldPlayer> midfielders) {
         this.teamMidfielders = midfielders;
     }
 
-    public void setTeamForwards(ArrayList forwards) {
+    public void setTeamForwards(ArrayList<OutfieldPlayer> forwards) {
         this.teamForwards = forwards;
     }
 
-    public void setTeamMembers(ArrayList members) {
+    public void setTeamMembers(ArrayList<Player> members) {
         this.teamMembers = members;
     }
 
@@ -144,6 +144,13 @@ public class Team implements Writable {
     public void removePlayer(Player player) {
         if (teamMembers.contains(player)) {
             teamMembers.remove(player);
+            if (player.getPosition().equals(Position.DEFENDER)) {
+                teamDefenders.remove(player);
+            } else if (player.getPosition().equals(Position.MIDFIELDER)) {
+                teamMidfielders.remove(player);
+            } else if (player.getPosition().equals(Position.FORWARD)) {
+                teamForwards.remove(player);
+            }
         }
     }
 

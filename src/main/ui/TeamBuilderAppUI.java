@@ -270,7 +270,7 @@ public class TeamBuilderAppUI extends JFrame {
                     Integer.parseInt(playerDribbling.getText()), Integer.parseInt(playerPhys.getText()),
                     Integer.parseInt(playerDribbling.getText()));
             addPlayerToTeam(player, myTeam);
-            addToProgressBar();
+            //addToProgressBar();
         }
     }
 
@@ -287,11 +287,16 @@ public class TeamBuilderAppUI extends JFrame {
     }
 
     //EFFECTS: Increments progress bar representing team building progress
-    private void addToProgressBar() {
-        while (progressBar.getValue() <= 11) {
-            int current = progressBar.getValue();
-            progressBar.setValue(current + 1);
-            break;
+    private void addToProgressBar() throws NullPointerException {
+        try {
+            while (progressBar.getValue() <= 11) {
+                int current = progressBar.getValue();
+                progressBar.setValue(current + 1);
+                break;
+            }
+            progressBar.setValue(0);
+        } catch (NullPointerException e) {
+            //Do nothing
         }
     }
 
@@ -315,20 +320,30 @@ public class TeamBuilderAppUI extends JFrame {
     //MODIFIES: myTeam
     //EFFECTS: Creates window showing players currently on the team with their corresponding ratings, removes specified
     //player from the team and creates new player to replace this removed player
-    private void editPlayer(Team myTeam) {
-        JPanel playersOnTeam = new JPanel(new GridLayout(4, 1));
-        playersOnTeam.add(new JLabel("Players on Team :" + myTeam.getMemberNames()));
-        playersOnTeam.add(new JLabel("Player Ratings :" + myTeam.getRatings(myTeam)));
-        JTextField playerToEdit = new JTextField(10);
-        playersOnTeam.add(new JLabel("Enter player name to edit: "));
-        playersOnTeam.add(playerToEdit);
-        JOptionPane.showConfirmDialog(null, playersOnTeam, "Player Editing", JOptionPane.OK_CANCEL_OPTION);
+    private void editPlayer(Team myTeam) throws NullPointerException {
+        try {
+            JPanel playersOnTeam = new JPanel(new GridLayout(4, 1));
+            playersOnTeam.add(new JLabel("Players on Team :" + myTeam.getMemberNames()));
+            playersOnTeam.add(new JLabel("Player Ratings :" + myTeam.getRatings(myTeam)));
+            JTextField playerToEdit = new JTextField(10);
+            playersOnTeam.add(new JLabel("Enter player name to edit: "));
+            playersOnTeam.add(playerToEdit);
+            JOptionPane.showConfirmDialog(null, playersOnTeam, "Player Editing", JOptionPane.OK_CANCEL_OPTION);
 
-        String playerName = playerToEdit.getText();
+            String playerName = playerToEdit.getText().toLowerCase();
+            edit(myTeam, playerName);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No Player Edited", null, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    //MODIFIES: myTeam
+    //EFFECTS: Edits player with playerName on myTeam
+    private void edit(Team myTeam, String playerName) {
         Player playerToBeEdited = null;
         Position pos = null;
         for (Player player : myTeam.getTeamMembers()) {
-            if (player.getName().equals(playerName)) {
+            if (player.getName().toLowerCase().equals(playerName)) {
                 playerToBeEdited = player;
                 pos = playerToBeEdited.getPosition();
             }
