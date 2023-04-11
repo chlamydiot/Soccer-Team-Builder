@@ -6,14 +6,14 @@
                 {
                     "handlingRating": 4,
                     "name": "j",
-                    "jerseyNumber": 1,
+                    "jerseyNumber": 2,
                     "speedRating": 7,
                     "position": "GOALTENDER",
                     "reflexRating": 6,
                     "positioningRating": 8,
                     "diveRating": 3,
-                    "age": 2,
-                    "kickRating": 5
+                    "kickRating": 5,
+                    "age": 1
                 },
                 {
                     "physicalityRating": 7,
@@ -138,14 +138,14 @@
                 {
                     "handlingRating": 4,
                     "name": "n",
-                    "jerseyNumber": 1,
+                    "jerseyNumber": 2,
                     "speedRating": 7,
                     "position": "GOALTENDER",
                     "reflexRating": 6,
                     "positioningRating": 8,
                     "diveRating": 3,
-                    "age": 2,
-                    "kickRating": 5
+                    "kickRating": 5,
+                    "age": 1
                 }
             ],
             "formation": "FourThreeThree",
@@ -237,7 +237,7 @@
                     "shot": 4
                 }
             ],
-            "team goalie": "model.Goalie@136a224c",
+            "team goalie": "model.Goalie@363e013b",
             "team forwards": [
                 {
                     "jersey number": 1,
@@ -283,14 +283,14 @@
                 {
                     "handlingRating": 99,
                     "name": "Allison",
-                    "jerseyNumber": 88,
+                    "jerseyNumber": 29,
                     "speedRating": 88,
                     "position": "GOALTENDER",
                     "reflexRating": 99,
                     "positioningRating": 77,
                     "diveRating": 77,
-                    "age": 29,
-                    "kickRating": 88
+                    "kickRating": 88,
+                    "age": 88
                 },
                 {
                     "physicalityRating": 88,
@@ -315,18 +315,6 @@
                     "defendingRating": 87,
                     "shotRating": 77,
                     "age": 4
-                },
-                {
-                    "physicalityRating": 89,
-                    "dribblingRating": 87,
-                    "paceRating": 77,
-                    "passingRating": 77,
-                    "name": "Joel",
-                    "jerseyNumber": 30,
-                    "position": "DEFENDER",
-                    "defendingRating": 87,
-                    "shotRating": 88,
-                    "age": 23
                 },
                 {
                     "physicalityRating": 98,
@@ -411,6 +399,18 @@
                     "defendingRating": 88,
                     "shotRating": 88,
                     "age": 88
+                },
+                {
+                    "physicalityRating": 7,
+                    "dribblingRating": 8,
+                    "paceRating": 7,
+                    "passingRating": 9,
+                    "name": "Dave",
+                    "jerseyNumber": 5,
+                    "position": "DEFENDER",
+                    "defendingRating": 8,
+                    "shotRating": 8,
+                    "age": 6
                 }
             ],
             "formation": "FourFourTwo",
@@ -490,18 +490,6 @@
                     "shot": 77
                 },
                 {
-                    "jersey number": 30,
-                    "dribbling": 87,
-                    "pace": 77,
-                    "name": "Joel",
-                    "defending": 87,
-                    "position": "DEFENDER",
-                    "passing": 77,
-                    "physicality": 89,
-                    "age": 23,
-                    "shot": 88
-                },
-                {
                     "jersey number": 26,
                     "dribbling": 78,
                     "pace": 98,
@@ -512,9 +500,21 @@
                     "physicality": 98,
                     "age": 26,
                     "shot": 87
+                },
+                {
+                    "jersey number": 5,
+                    "dribbling": 8,
+                    "pace": 7,
+                    "name": "Dave",
+                    "defending": 8,
+                    "position": "DEFENDER",
+                    "passing": 9,
+                    "physicality": 7,
+                    "age": 6,
+                    "shot": 8
                 }
             ],
-            "team goalie": "model.Goalie@5775522d",
+            "team goalie": "model.Goalie@47c3dd4c",
             "team forwards": [
                 {
                     "jersey number": 30,

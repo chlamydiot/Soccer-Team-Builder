@@ -25,6 +25,7 @@ public class ListOfTeams implements Writable {
 
     public void addTeamToList(Team team) {
         teamsSoFar.add(team);
+        EventLog.getInstance().logEvent(new Event("Added team: " + team.getName() + " to " + collectionName));
     }
 
     public ArrayList<Team> getTeams() {

@@ -124,14 +124,20 @@ public class Team implements Writable {
 
     public void addPlayer433(Player player) {
         addPlayer(player, 4, 3, 3);
+        EventLog.getInstance().logEvent(new Event("Added player: " + player.getName()
+                + " to team: " + teamName));
     }
 
     public void addPlayer442(Player player) {
         addPlayer(player, 4, 4, 2);
+        EventLog.getInstance().logEvent(new Event("Added player: " + player.getName()
+                + " to team: " + teamName));
     }
 
     public void addPlayer352(Player player) {
         addPlayer(player, 3, 5, 2);
+        EventLog.getInstance().logEvent(new Event("Added player: " + player.getName()
+                + " to team: " + teamName));
     }
 
     public ArrayList<Player> getTeamMembers() {
@@ -152,6 +158,7 @@ public class Team implements Writable {
                 teamForwards.remove(player);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Removed player: " + player + "from team: " + teamName));
     }
 
     //REQUIRES: Team be made up of exactly 11 items

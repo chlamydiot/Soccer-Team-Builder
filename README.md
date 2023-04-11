@@ -60,7 +60,18 @@ was uncompleted.
 - To load the state of the application to file, the user can use the menu panel at the top of the application and click
   the "load teams" button, or alternatively click the "load teams" button on the left hand panel.
 
-
 ## Citations:
 All classes in persistence packages (both in testing and model) were inspired/based on JsonSerializationDemo provided by
 the UBC CPSC 210 team.
+
+## Phase 4: Task 2
+Mon Apr 10 23:19:40 PDT 2023
+Added team: Liverpool to Teams Built So Far
+Mon Apr 10 23:19:51 PDT 2023
+Added player: Allison to team: Liverpool
+Mon Apr 10 23:20:08 PDT 2023
+Added player: Virgil van Dijk to team: Liverpool
+Mon Apr 10 23:20:22 PDT 2023
+Added player: Thiago to team: Liverpool
+Mon Apr 10 23:20:37 PDT 2023
+Added player: Darwin Nunez to team: Liverpool

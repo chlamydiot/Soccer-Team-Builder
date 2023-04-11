@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import model.*;
+import model.Event;
 import persistence.*;
 
 //TODO add player icon to field when added to team
@@ -315,7 +316,19 @@ public class TeamBuilderAppUI extends JFrame {
         }
     }
 
-    ////Represents EditPlayer button and defines event performed upon action event
+    //TODO
+    //EFFECTS: Adds player icon to soccer field
+    private void addPlayerToField() {
+        //STUB
+    }
+
+    //TODO
+    //EFFECTS: Pop up player stats on mouse hover
+    private void onHoverPlayerStats() {
+        //STUB
+    }
+
+    //Represents EditPlayer button and defines event performed upon action event
     private class EditPlayer extends AbstractAction {
 
         //EFFECTS: Creates button with action to edit player on team
@@ -457,6 +470,10 @@ public class TeamBuilderAppUI extends JFrame {
         //EFFECTS: Quits and closes application
         @Override
         public void actionPerformed(ActionEvent e) {
+            EventLog el = EventLog.getInstance();
+            for (Event next : el) {
+                System.out.println(next.toString());
+            }
             System.exit(0);
         }
     }
