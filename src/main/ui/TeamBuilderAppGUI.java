@@ -14,7 +14,7 @@ import persistence.*;
 //TODO add player icon to field when added to team
 
 //Soccer team builder GUI application
-public class TeamBuilderAppUI extends JFrame {
+public class TeamBuilderAppGUI extends JFrame {
 
     private final int width;
     private final int height;
@@ -27,7 +27,7 @@ public class TeamBuilderAppUI extends JFrame {
 
     //EFFECTS: Instantiates GUI with specified width and height, and instantiates a list of teams build and json
     //writer and reader instances for persistence
-    public TeamBuilderAppUI(int w, int h) {
+    public TeamBuilderAppGUI(int w, int h) {
         width = w;
         height = h;
         teamsSoFar = new ListOfTeams();

@@ -75,3 +75,13 @@ Mon Apr 10 23:20:22 PDT 2023
 Added player: Thiago to team: Liverpool
 Mon Apr 10 23:20:37 PDT 2023
 Added player: Darwin Nunez to team: Liverpool
+
+## Phase 4: Task 3
+If I had more time to work on this project, I would change the design of my player, Goalie and OutfieldPlayer classes
+to minimize even somewhat redundant/similar code. I would go back and create an abstract player class which implements 
+many of the methods which are similar, but not exactly the same, within the Goalie and OutfieldPlayer classes in
+particular.
+I would also change the implementation of my TeamBuilderAppGUI class, using many separate classes for the different
+functionality within the TeamBuilderAppGUI rather than implementing all of the functionality in that single GUI class.
+This would help better compartmentalize my GUI code and make it easier to follow, and hence easier to change in the
+future if need be.
