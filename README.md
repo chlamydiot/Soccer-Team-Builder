@@ -51,8 +51,14 @@ Added player: Darwin Nunez to team: Liverpool
 
 ## Screenshots from Application:
 Main Menu:
+
 ![TeamBuilderProject](https://user-images.githubusercontent.com/118025045/232140415-e53d3181-d9c1-4813-833e-26fdce9a97bd.png)
 
 Player Adding Interface:
+
 ![teambuilderproject2](https://user-images.githubusercontent.com/118025045/232140499-548d1e47-0007-4443-8868-45141e1a5595.png)
+
+Details of Previously Built Team:
+
+![teambuilderproject3](https://user-images.githubusercontent.com/118025045/232166626-8057b996-29bf-40f0-b430-6a0318c8ce3b.png)
 
